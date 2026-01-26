@@ -5,9 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fine Plastic Industries — Plastic Bottle Manufacturer</title>
 
-  <meta name="description" content="Fine Plastic Industries is a plastic bottle and container manufacturer providing durable, custom, and bulk plastic packaging solutions." />
-  <meta name="keywords" content="plastic bottle manufacturer, plastic containers, bulk plastic bottles, custom plastic molds, Fine Plastic Industries" />
-  <meta name="robots" content="index, follow" />
+  <meta name="description" content="Fine Plastic Industries manufactures plastic bottles for water, juices, cosmetics, pharmaceuticals, and oils." />
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -27,6 +25,7 @@
       padding: 40px 20px;
     }
 
+    /* HEADER */
     header {
       display: flex;
       justify-content: space-between;
@@ -35,9 +34,16 @@
     }
 
     .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
       font-size: 22px;
       font-weight: 700;
-      letter-spacing: 1px;
+    }
+
+    .logo img {
+      height: 45px;
+      object-fit: contain;
     }
 
     nav a {
@@ -45,16 +51,21 @@
       text-decoration: none;
       color: #333;
       font-weight: 500;
+      transition: color 0.3s ease;
     }
 
-    nav a:hover { color: #000; }
+    nav a:hover {
+      color: #0f172a;
+    }
 
+    /* HERO */
     .hero {
       background: linear-gradient(135deg, #0f172a, #1e293b);
       color: #fff;
       padding: 80px 40px;
       border-radius: 16px;
       margin-bottom: 100px;
+      animation: fadeUp 0.8s ease;
     }
 
     .hero h1 {
@@ -69,15 +80,17 @@
       color: #d1d5db;
     }
 
+    /* SECTIONS */
     .section {
-      margin-bottom: 80px;
+      margin-bottom: 90px;
     }
 
     .section h2 {
       font-size: 30px;
-      margin-bottom: 20px;
+      margin-bottom: 30px;
     }
 
+    /* SERVICES */
     .services {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -88,7 +101,13 @@
       background: #fff;
       border: 1px solid #eee;
       padding: 30px;
-      border-radius: 12px;
+      border-radius: 14px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 15px 30px rgba(0,0,0,0.08);
     }
 
     .card h3 {
@@ -101,27 +120,56 @@
       color: #555;
     }
 
+    /* GALLERY */
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: transform 0.4s ease;
+      background: #e5e7eb;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+    }
+
+    /* WHY */
     .why p {
-      max-width: 700px;
+      max-width: 720px;
       font-size: 17px;
       color: #444;
     }
 
+    /* CONTACT */
     .contact {
       background: #f1f5f9;
       padding: 60px 40px;
       border-radius: 16px;
+      text-align: center;
     }
 
     .contact a {
       display: inline-block;
       margin-top: 20px;
-      padding: 14px 28px;
+      padding: 14px 30px;
       background: #0f172a;
       color: #fff;
       text-decoration: none;
       border-radius: 8px;
       font-weight: 600;
+      transition: background 0.3s ease, transform 0.3s ease;
+    }
+
+    .contact a:hover {
+      background: #020617;
+      transform: translateY(-2px);
     }
 
     footer {
@@ -129,6 +177,12 @@
       padding: 30px 0;
       font-size: 14px;
       color: #777;
+    }
+
+    /* ANIMATION */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media(max-width: 768px) {
@@ -146,19 +200,23 @@
 <body>
   <div class="container">
     <header>
-      <div class="logo">Fine Plastic Industries</div>
+      <div class="logo">
+        <!-- Replace logo.png with your logo file -->
+        <img src="logo.png" alt="Fine Plastic Industries Logo">
+        Fine Plastic Industries
+      </div>
       <nav>
         <a href="#products">Products</a>
-        <a href="#why">Why Us</a>
+        <a href="#gallery">Gallery</a>
         <a href="#contact">Contact</a>
       </nav>
     </header>
 
     <section class="hero">
-      <h1>Reliable Plastic Bottle Manufacturing for Bulk & Custom Needs</h1>
+      <h1>High-Quality Plastic Bottles for Everyday Brands</h1>
       <p>
-        Fine Plastic Industries manufactures high-quality plastic bottles and containers
-        for food, beverage, household, and industrial use.
+        Manufacturing plastic bottles for water, juices, cosmetics,
+        pharmaceuticals, and oils — built for bulk and consistency.
       </p>
     </section>
 
@@ -166,35 +224,40 @@
       <h2>What We Manufacture</h2>
       <div class="services">
         <div class="card">
-          <h3>Plastic Bottles</h3>
-          <p>Durable and leak-resistant bottles available in multiple sizes and designs.</p>
+          <h3>Water & Juice Bottles</h3>
+          <p>Food-grade bottles designed for safety, clarity, and durability.</p>
         </div>
         <div class="card">
-          <h3>Custom Molds</h3>
-          <p>Custom bottle designs created with dedicated molds for your brand.</p>
+          <h3>Cosmetic Packaging</h3>
+          <p>Attractive bottles for lotions, shampoos, and personal care products.</p>
         </div>
         <div class="card">
-          <h3>Bulk Manufacturing</h3>
-          <p>Large-scale production with consistent quality and timely delivery.</p>
+          <h3>Pharmaceutical Bottles</h3>
+          <p>Precision-made containers suitable for medical and pharma use.</p>
         </div>
         <div class="card">
-          <h3>Industrial Containers</h3>
-          <p>Strong containers suitable for chemicals, oils, and industrial products.</p>
+          <h3>Oil Bottles</h3>
+          <p>Leak-resistant bottles designed for edible and non-edible oils.</p>
         </div>
       </div>
     </section>
 
-    <section id="why" class="section why">
-      <h2>Why Fine Plastic Industries</h2>
-      <p>
-        With a focus on quality, consistency, and long-term partnerships,
-        we help brands and distributors source reliable plastic packaging solutions.
-      </p>
+    <section id="gallery" class="section">
+      <h2>Product Gallery</h2>
+      <div class="gallery">
+        <!-- Replace these with real product images -->
+        <img src="bottle1.jpg" alt="Plastic Bottle">
+        <img src="bottle2.jpg" alt="Plastic Bottle">
+        <img src="bottle3.jpg" alt="Plastic Bottle">
+        <img src="bottle4.jpg" alt="Plastic Bottle">
+        <img src="bottle5.jpg" alt="Plastic Bottle">
+        <img src="bottle6.jpg" alt="Plastic Bottle">
+      </div>
     </section>
 
     <section id="contact" class="section contact">
       <h2>Get in Touch</h2>
-      <p>Looking for bulk orders or custom plastic bottles? Contact us today.</p>
+      <p>Looking for bulk orders or custom plastic bottles?</p>
       <a href="mailto:info@fineplasticindustries.com">Contact Us</a>
     </section>
 
