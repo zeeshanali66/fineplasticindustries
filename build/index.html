@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Fine Plastic Industries — Plastic Bottle Manufacturer</title>
 
-  <meta name="description" content="Fine Plastic Industries manufactures plastic bottles for water, juices, cosmetics, pharmaceuticals, and oils." />
+  <meta name="description" content="Fine Plastic Industries manufactures high-quality plastic bottles for water, juices, cosmetics, pharmaceutical and oil industries." />
+  <meta name="keywords" content="plastic bottle manufacturer, water bottles, cosmetic packaging, pharmaceutical bottles, Fine Plastic Industries" />
+  <meta name="robots" content="index, follow" />
 
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -17,6 +20,7 @@
       background: #f8fafc;
       color: #111;
       line-height: 1.6;
+      scroll-behavior: smooth;
     }
 
     .container {
@@ -25,7 +29,7 @@
       padding: 40px 20px;
     }
 
-    /* HEADER */
+    /* ---------- HEADER ---------- */
     header {
       display: flex;
       justify-content: space-between;
@@ -33,18 +37,9 @@
       margin-bottom: 80px;
     }
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-size: 22px;
-      font-weight: 700;
-    }
-
     .logo img {
-      height: 300px;
-      width: auto;
-      object-fit: contain;
+      width: 250px;
+      height: auto;
     }
 
     nav a {
@@ -52,46 +47,70 @@
       text-decoration: none;
       color: #333;
       font-weight: 500;
-      transition: color 0.3s ease;
+      position: relative;
     }
 
-    nav a:hover {
-      color: #0f172a;
+    nav a::after {
+      content: '';
+      position: absolute;
+      width: 0;
+      height: 2px;
+      background: #0f172a;
+      bottom: -6px;
+      left: 0;
+      transition: width 0.3s ease;
     }
 
-    /* HERO */
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    /* ---------- HERO ---------- */
     .hero {
       background: linear-gradient(135deg, #0f172a, #1e293b);
       color: #fff;
       padding: 80px 40px;
       border-radius: 16px;
       margin-bottom: 100px;
-      animation: fadeUp 0.8s ease;
+      animation: heroFade 1.2s ease forwards;
+    }
+
+    @keyframes heroFade {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     .hero h1 {
       font-size: 44px;
-      max-width: 700px;
+      max-width: 720px;
     }
 
     .hero p {
       margin-top: 20px;
       font-size: 18px;
-      max-width: 600px;
+      max-width: 620px;
       color: #d1d5db;
     }
 
-    /* SECTIONS */
+    /* ---------- SECTIONS ---------- */
     .section {
       margin-bottom: 90px;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .section h2 {
       font-size: 30px;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
-    /* SERVICES */
+    /* ---------- SERVICES ---------- */
     .services {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -107,83 +126,74 @@
     }
 
     .card:hover {
-      transform: translateY(-6px);
-      box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+      transform: translateY(-10px);
+      box-shadow: 0 18px 40px rgba(0,0,0,0.1);
     }
 
-    .card h3 {
-      margin-bottom: 10px;
-      font-size: 20px;
-    }
-
-    .card p {
-      font-size: 15px;
-      color: #555;
-    }
-
-    /* GALLERY */
+    /* ---------- GALLERY ---------- */
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 22px;
     }
 
     .gallery img {
       width: 100%;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 12px;
-      transition: transform 0.4s ease;
-      background: #e5e7eb;
+      border-radius: 14px;
+      opacity: 0;
+      transform: scale(0.95);
+      transition: all 0.6s ease;
+    }
+
+    .gallery img.visible {
+      opacity: 1;
+      transform: scale(1);
     }
 
     .gallery img:hover {
-      transform: scale(1.05);
+      transform: scale(1.08);
+      box-shadow: 0 14px 35px rgba(0,0,0,0.15);
     }
 
-    /* WHY */
-    .why p {
-      max-width: 720px;
-      font-size: 17px;
-      color: #444;
-    }
-
-    /* CONTACT */
+    /* ---------- CONTACT ---------- */
     .contact {
       background: #f1f5f9;
       padding: 60px 40px;
       border-radius: 16px;
-      text-align: center;
     }
 
-    .contact a {
-      display: inline-block;
-      margin-top: 20px;
-      padding: 14px 30px;
-      background: #0f172a;
-      color: #fff;
+    .contact-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 25px;
+    }
+
+    .contact-buttons a {
+      display: inline-flex;
+      align-items: center;
+      padding: 14px 26px;
       text-decoration: none;
-      border-radius: 8px;
       font-weight: 600;
-      transition: background 0.3s ease, transform 0.3s ease;
+      border-radius: 10px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
 
-    .contact a:hover {
-      background: #020617;
-      transform: translateY(-2px);
+    .contact-buttons a:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 14px 30px rgba(0,0,0,0.18);
     }
 
+    .whatsapp { background: #25D366; color: #fff; }
+    .call { background: #0f172a; color: #fff; }
+    .email { background: #2563eb; color: #fff; }
+
+    /* ---------- FOOTER ---------- */
     footer {
       text-align: center;
       padding: 30px 0;
       font-size: 14px;
       color: #777;
-    }
-
-    /* ANIMATION */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
     }
 
     @media(max-width: 768px) {
@@ -200,10 +210,10 @@
 
 <body>
   <div class="container">
+
     <header>
       <div class="logo">
-        <!-- Replace logo.png with your logo file -->
-        <img src="logo.png">
+        <img src="images/logo.png" alt="Fine Plastic Industries Logo">
       </div>
       <nav>
         <a href="#products">Products</a>
@@ -213,57 +223,74 @@
     </header>
 
     <section class="hero">
-      <h1>High-Quality Plastic Bottles for Everyday Brands</h1>
+      <h1>High-Quality Plastic Bottle Manufacturing</h1>
       <p>
-        Manufacturing plastic bottles for water, juices, cosmetics,
-        pharmaceuticals, and oils — built for bulk and consistency.
+        We manufacture reliable plastic bottles for
+        water, juices, cosmetics, pharmaceutical products and oils.
       </p>
     </section>
 
     <section id="products" class="section">
       <h2>What We Manufacture</h2>
       <div class="services">
-        <div class="card">
-          <h3>Water & Juice Bottles</h3>
-          <p>Food-grade bottles designed for safety, clarity, and durability.</p>
-        </div>
-        <div class="card">
-          <h3>Cosmetic Packaging</h3>
-          <p>Attractive bottles for lotions, shampoos, and personal care products.</p>
-        </div>
-        <div class="card">
-          <h3>Pharmaceutical Bottles</h3>
-          <p>Precision-made containers suitable for medical and pharma use.</p>
-        </div>
-        <div class="card">
-          <h3>Oil Bottles</h3>
-          <p>Leak-resistant bottles designed for edible and non-edible oils.</p>
-        </div>
+        <div class="card"><h3>Water & Juice Bottles</h3><p>Food-grade, durable packaging.</p></div>
+        <div class="card"><h3>Cosmetic Packaging</h3><p>Premium bottles for cosmetic brands.</p></div>
+        <div class="card"><h3>Pharmaceutical Bottles</h3><p>Hygienic and precise containers.</p></div>
+        <div class="card"><h3>Oil Containers</h3><p>Leak-resistant packaging solutions.</p></div>
       </div>
     </section>
 
     <section id="gallery" class="section">
-      <h2>Product Gallery</h2>
+      <h2>Our Products</h2>
       <div class="gallery">
-        <!-- Replace these with real product images -->
-        <img src="bottle1.jpg" alt="Plastic Bottle">
-        <img src="bottle2.jpg" alt="Plastic Bottle">
-        <img src="bottle3.jpg" alt="Plastic Bottle">
-        <img src="bottle4.jpg" alt="Plastic Bottle">
-        <img src="bottle5.jpg" alt="Plastic Bottle">
-        <img src="bottle6.jpg" alt="Plastic Bottle">
+        <img src="images/bottle1.jpg">
+        <img src="images/bottle2.jpg">
+        <img src="images/bottle3.jpg">
+        <img src="images/bottle4.jpg">
+        <img src="images/bottle5.jpg">
       </div>
     </section>
 
     <section id="contact" class="section contact">
-      <h2>Get in Touch</h2>
-      <p>Looking for bulk orders or custom plastic bottles?</p>
-      <a href="mailto:info@fineplasticindustries.com">Contact Us</a>
+      <h2>Contact Us</h2>
+      <p>For bulk orders or custom requirements, reach out.</p>
+
+      <div class="contact-buttons">
+        <a class="whatsapp" href="https://wa.me/923009492478" target="_blank">WhatsApp</a>
+        <a class="call" href="tel:+923009492478">Call Now</a>
+        <a class="email" href="mailto:fineplasticindustry@yahoo.com">Email Us</a>
+      </div>
     </section>
 
     <footer>
       © 2026 Fine Plastic Industries. All rights reserved.
     </footer>
+
   </div>
+
+  <!-- Scroll Reveal Script -->
+  <script>
+    const sections = document.querySelectorAll('.section');
+    const images = document.querySelectorAll('.gallery img');
+
+    const reveal = () => {
+      const trigger = window.innerHeight * 0.85;
+
+      sections.forEach(sec => {
+        if (sec.getBoundingClientRect().top < trigger) {
+          sec.classList.add('visible');
+        }
+      });
+
+      images.forEach(img => {
+        if (img.getBoundingClientRect().top < trigger) {
+          img.classList.add('visible');
+        }
+      });
+    };
+
+    window.addEventListener('scroll', reveal);
+    reveal();
+  </script>
 </body>
 </html>
