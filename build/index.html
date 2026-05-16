@@ -30,7 +30,9 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Fine Plastic Industries" />
   <meta property="og:locale" content="en_US" />
-  <meta property="og:image" content="https://fineplasticindustries.onrender.com/images/logo.png" />
+  <meta property="og:image" content="https://fineplasticindustries.onrender.com/images/bottle1.jpg" />
+  <meta property="og:image:alt" content="Premium plastic bottles by Fine Plastic Industries" />
+  <meta name="twitter:image" content="https://fineplasticindustries.onrender.com/images/bottle1.jpg" />
 
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image" />
@@ -75,6 +77,54 @@
     "sameAs": [
       "https://www.instagram.com/fineplasticindustries",
       "https://wa.me/923009492478"
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.7",
+      "bestRating": "5",
+      "worstRating": "1",
+      "reviewCount": "11"
+    },
+    "review": [
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Khalid Muhammad"
+        },
+        "reviewBody": "Fine Plastic Industries make quality plastic PET, HDPE bottles, jars and containers."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Mobeen Malik"
+        },
+        "reviewBody": "Very good company, owner Imran bhai is a wonderful and helpful man."
+      },
+      {
+        "@type": "Review",
+        "reviewRating": {
+          "@type": "Rating",
+          "ratingValue": "5",
+          "bestRating": "5"
+        },
+        "author": {
+          "@type": "Person",
+          "name": "Tanveer Iqbal"
+        },
+        "reviewBody": "Best quality. In-time delivered."
+      }
     ]
   }
   </script>
@@ -715,6 +765,194 @@
       line-height: 1.7;
     }
 
+    /* ---------- TESTIMONIALS ---------- */
+    .testimonials {
+      background: linear-gradient(to bottom right, #f8fafc, #e0e7ff);
+    }
+
+    .reviews-summary {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+      margin-bottom: 50px;
+      padding: 24px 32px;
+      background: var(--white);
+      border-radius: 16px;
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+      box-shadow: var(--shadow-md);
+    }
+
+    .google-logo {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -1px;
+    }
+
+    .google-logo span:nth-child(1) { color: #4285F4; }
+    .google-logo span:nth-child(2) { color: #EA4335; }
+    .google-logo span:nth-child(3) { color: #FBBC05; }
+    .google-logo span:nth-child(4) { color: #4285F4; }
+    .google-logo span:nth-child(5) { color: #34A853; }
+    .google-logo span:nth-child(6) { color: #EA4335; }
+
+    .reviews-rating {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .rating-stars {
+      color: #fbbf24;
+      font-size: 22px;
+      letter-spacing: 2px;
+    }
+
+    .rating-text {
+      font-size: 14px;
+      color: var(--text-light);
+      margin-top: 4px;
+    }
+
+    .rating-text strong {
+      color: var(--text-dark);
+    }
+
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 28px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      padding: 32px;
+      border-radius: 16px;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .testimonial-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--accent);
+    }
+
+    .testimonial-quote-icon {
+      position: absolute;
+      top: 20px;
+      right: 24px;
+      font-size: 48px;
+      color: var(--accent);
+      opacity: 0.15;
+      line-height: 1;
+    }
+
+    .testimonial-stars {
+      color: #fbbf24;
+      font-size: 16px;
+      letter-spacing: 2px;
+      margin-bottom: 16px;
+    }
+
+    .testimonial-text {
+      color: var(--text-dark);
+      line-height: 1.7;
+      font-size: 16px;
+      margin-bottom: 24px;
+      flex: 1;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+
+    .author-avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent-hover));
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .author-info {
+      flex: 1;
+    }
+
+    .author-name {
+      font-weight: 600;
+      color: var(--text-dark);
+      font-size: 15px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .author-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      background: #e0f2fe;
+      color: #0369a1;
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 10px;
+    }
+
+    .author-meta {
+      font-size: 13px;
+      color: var(--text-light);
+      margin-top: 2px;
+    }
+
+    .reviews-cta {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .reviews-cta a {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 28px;
+      background: var(--white);
+      color: var(--text-dark);
+      text-decoration: none;
+      font-weight: 600;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .reviews-cta a:hover {
+      background: var(--accent);
+      color: var(--white);
+      border-color: var(--accent);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+
     /* ---------- CONTACT ---------- */
     .contact-container {
       display: grid;
@@ -1118,10 +1356,11 @@
         <a href="#why-us">Why Us</a>
         <a href="#process">Process</a>
         <a href="#gallery">Gallery</a>
+        <a href="#testimonials">Reviews</a>
         <a href="#contact" class="cta">Get Quote</a>
       </nav>
-      <button class="mobile-toggle" id="mobileToggle">
-        <i class="fas fa-bars"></i>
+      <button class="mobile-toggle" id="mobileToggle" aria-label="Toggle navigation menu" aria-expanded="false">
+        <i class="fas fa-bars" aria-hidden="true"></i>
       </button>
     </div>
   </header>
@@ -1344,101 +1583,194 @@
       </div>
       <div class="gallery-grid">
         <div class="gallery-item">
-          <img src="images/bottle1.jpg" alt="500ml plastic water bottles for drinking water">
+          <img src="images/bottle1.jpg" loading="lazy" alt="500ml plastic water bottle for drinking water">
           <div class="gallery-overlay">
             <span class="gallery-overlay-text">Water Bottles</span>
           </div>
         </div>
         <div class="gallery-item">
-          <img src="images/bottle2.jpg" alt="120ml cosmetic packaging bottles for beauty products">
+          <img src="images/bottle2.jpg" loading="lazy" alt="120ml cosmetic packaging bottle for beauty products">
           <div class="gallery-overlay">
             <span class="gallery-overlay-text">Cosmetic Packaging</span>
           </div>
         </div>
         <div class="gallery-item">
-          <img src="images/bottle3.jpg" alt="Pharmaceutical bottles for medicine and syrups">
+          <img src="images/bottle3.jpg" loading="lazy" alt="Pharmaceutical bottle for medicine and syrups">
           <div class="gallery-overlay">
             <span class="gallery-overlay-text">Medical Bottles</span>
           </div>
         </div>
         <div class="gallery-item">
-          <img src="images/bottle4.jpg" alt="Oil containers for edible cooking oil packaging">
+          <img src="images/bottle4.jpg" loading="lazy" alt="HDPE oil container for edible cooking oil">
           <div class="gallery-overlay">
             <span class="gallery-overlay-text">Oil Containers</span>
           </div>
         </div>
         <div class="gallery-item">
-          <img src="images/bottle5.jpg" alt="Cosmetic">
+          <img src="images/bottle5.jpg" loading="lazy" alt="Custom-designed plastic bottle with screw cap">
           <div class="gallery-overlay">
             <span class="gallery-overlay-text">Custom Designs</span>
           </div>
         </div>
         <div class="gallery-item">
-          <img src="images/bottle6.jpg" alt="Cosmetic">
+          <img src="images/bottle6.jpg" loading="lazy" alt="Round cosmetic bottle for lotions and creams">
           <div class="gallery-overlay">
-            <span class="gallery-overlay-text">Cosmetic Bottles</span>
+            <span class="gallery-overlay-text">Lotion Bottles</span>
           </div>
         </div>
         <div class="gallery-item">
-          <img src="images/bottle7.jpg" alt="Cosmetic">
+          <img src="images/bottle7.jpg" loading="lazy" alt="Premium shampoo bottle with pump dispenser">
           <div class="gallery-overlay">
-            <span class="gallery-overlay-text">Cosmetic Bottles</span>
+            <span class="gallery-overlay-text">Shampoo Bottles</span>
           </div>
         </div>
         <div class="gallery-item">
-          <img src="images/bottle8.jpg" alt="Cosmetic">
+          <img src="images/bottle8.jpg" loading="lazy" alt="Slim cylindrical cosmetic bottle for serums">
           <div class="gallery-overlay">
-            <span class="gallery-overlay-text">Cosmetic Bottles</span>
+            <span class="gallery-overlay-text">Serum Bottles</span>
           </div>
         </div>
         <div class="gallery-item">
-          <img src="images/bottle9.jpg" alt="Cosmetic">
+          <img src="images/bottle9.jpg" loading="lazy" alt="Compact cosmetic bottle for skincare products">
           <div class="gallery-overlay">
-            <span class="gallery-overlay-text">Cosmetic Bottles</span>
+            <span class="gallery-overlay-text">Skincare Bottles</span>
           </div>
         </div>
         <div class="gallery-item">
-          <img src="images/bottle10.png" alt="Cosmetic">
+          <img src="images/bottle10.jpg" loading="lazy" alt="Frosted glass-effect cosmetic bottle">
           <div class="gallery-overlay">
-            <span class="gallery-overlay-text">Cosmetic Bottles</span>
+            <span class="gallery-overlay-text">Designer Bottles</span>
           </div>
         </div>
         <div class="gallery-item">
-          <img src="images/bottle11.jpg" alt="Cosmetic">
+          <img src="images/bottle11.jpg" loading="lazy" alt="Tall cosmetic bottle for body wash">
           <div class="gallery-overlay">
-            <span class="gallery-overlay-text">Cosmetic Bottles</span>
+            <span class="gallery-overlay-text">Body Wash Bottles</span>
           </div>
         </div>
         <div class="gallery-item">
-          <img src="images/bottle12.jpg" alt="Cosmetic">
+          <img src="images/bottle12.jpg" loading="lazy" alt="Pump-top liquid soap dispenser bottle">
           <div class="gallery-overlay">
-            <span class="gallery-overlay-text">Cosmetic Bottles</span>
+            <span class="gallery-overlay-text">Soap Dispensers</span>
           </div>
         </div>
         <div class="gallery-item">
-          <img src="images/bottle13.png" alt="Cosmetic">
+          <img src="images/bottle13.jpg" loading="lazy" alt="Travel-size cosmetic bottle with flip cap">
           <div class="gallery-overlay">
-            <span class="gallery-overlay-text">Cosmetic Bottles</span>
+            <span class="gallery-overlay-text">Travel Bottles</span>
           </div>
         </div>
         <div class="gallery-item">
-          <img src="images/bottle14.jpg" alt="Cosmetic">
+          <img src="images/bottle14.jpg" loading="lazy" alt="Wide-mouth cosmetic jar for creams and gels">
           <div class="gallery-overlay">
-            <span class="gallery-overlay-text">Cosmetic Bottles</span>
+            <span class="gallery-overlay-text">Cream Jars</span>
           </div>
         </div>
         <div class="gallery-item">
-          <img src="images/bottle15.jpg" alt="Cosmetic">
+          <img src="images/bottle15.jpg" loading="lazy" alt="Sleek hair conditioner bottle">
           <div class="gallery-overlay">
-            <span class="gallery-overlay-text">Cosmetic Bottles</span>
+            <span class="gallery-overlay-text">Conditioner Bottles</span>
           </div>
         </div>
         <div class="gallery-item">
-          <img src="images/bottle16.png" alt="Cosmetic">
+          <img src="images/bottle16.jpg" loading="lazy" alt="Premium dropper bottle for facial oils">
           <div class="gallery-overlay">
-            <span class="gallery-overlay-text">Cosmetic Bottles</span>
+            <span class="gallery-overlay-text">Dropper Bottles</span>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section id="testimonials" class="section testimonials">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Customer Reviews</span>
+        <h2>What Our Clients Say</h2>
+        <p class="section-subtitle">
+          Trusted by businesses across Pakistan. Real reviews from verified Google customers.
+        </p>
+      </div>
+
+      <div class="reviews-summary">
+        <div class="google-logo">
+          <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
+        </div>
+        <div class="reviews-rating">
+          <div class="rating-stars">
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star"></i>
+            <i class="fas fa-star-half-alt"></i>
+          </div>
+          <div class="rating-text"><strong>4.7</strong> rating · Verified Google Reviews</div>
+        </div>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card">
+          <div class="testimonial-quote-icon">
+            <i class="fas fa-quote-right"></i>
+          </div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">
+            "Fine Plastic Industries make quality plastic PET, HDPE bottles, jars and containers."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">K</div>
+            <div class="author-info">
+              <div class="author-name">
+                Khalid Muhammad
+                <span class="author-badge"><i class="fas fa-map-marker-alt"></i> Local Guide</span>
+              </div>
+              <div class="author-meta">139 reviews · 3,416 photos</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-quote-icon">
+            <i class="fas fa-quote-right"></i>
+          </div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">
+            "Very good company, owner Imran bhai is a wonderful and helpful man."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">M</div>
+            <div class="author-info">
+              <div class="author-name">Mobeen Malik</div>
+              <div class="author-meta">3 reviews · 3 photos</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="testimonial-card">
+          <div class="testimonial-quote-icon">
+            <i class="fas fa-quote-right"></i>
+          </div>
+          <div class="testimonial-stars">★★★★★</div>
+          <p class="testimonial-text">
+            "Best quality. In-time delivered."
+          </p>
+          <div class="testimonial-author">
+            <div class="author-avatar">T</div>
+            <div class="author-info">
+              <div class="author-name">Tanveer Iqbal</div>
+              <div class="author-meta">Verified customer</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reviews-cta">
+        <a href="https://www.google.com/search?q=fine+plastic+industries+lahore" target="_blank" rel="noopener">
+          <i class="fab fa-google"></i>
+          Read All Reviews on Google
+          <i class="fas fa-arrow-right"></i>
+        </a>
       </div>
     </div>
   </section>
@@ -1496,7 +1828,7 @@
         </div>
 
         <div class="contact-buttons">
-          <a class="contact-btn whatsapp" href="https://wa.me/923009492478" target="_blank">
+          <a class="contact-btn whatsapp" href="https://wa.me/923009492478" target="_blank" rel="noopener noreferrer">
             <i class="fab fa-whatsapp"></i>
             <span>Message on WhatsApp</span>
           </a>
@@ -1524,8 +1856,16 @@
           Committed to excellence, innovation, and customer satisfaction.
         </p>
         <div class="social-links">
-          <a href="https://www.instagram.com/fineplasticindustries" target="_blank" class="social-link"><i class="fab fa-instagram"></i></a>
-          <a href="https://wa.me/923009492478" target="_blank" class="social-link"><i class="fab fa-whatsapp"></i></a>
+          <a href="https://www.instagram.com/fineplasticindustries" target="_blank" rel="noopener" class="social-link" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.633.336 3.608 1.311.975.975 1.249 2.242 1.311 3.608.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.336 2.633-1.311 3.608-.975.975-2.242 1.249-3.608 1.311-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.633-.336-3.608-1.311-.975-.975-1.249-2.242-1.311-3.608C2.175 15.747 2.163 15.367 2.163 12s.012-3.584.07-4.85c.062-1.366.336-2.633 1.311-3.608.975-.975 2.242-1.249 3.608-1.311 1.266-.058 1.646-.07 4.85-.07M12 0C8.741 0 8.332.014 7.052.072 5.197.157 3.355.673 2.014 2.014.673 3.355.157 5.197.072 7.052.014 8.332 0 8.741 0 12s.014 3.668.072 4.948c.085 1.855.601 3.697 1.942 5.038 1.341 1.341 3.183 1.857 5.038 1.942C8.332 23.986 8.741 24 12 24s3.668-.014 4.948-.072c1.855-.085 3.697-.601 5.038-1.942 1.341-1.341 1.857-3.183 1.942-5.038.058-1.28.072-1.689.072-4.948s-.014-3.668-.072-4.948c-.085-1.855-.601-3.697-1.942-5.038C20.645.673 18.803.157 16.948.072 15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/>
+            </svg>
+          </a>
+          <a href="https://wa.me/923009492478" target="_blank" rel="noopener" class="social-link" aria-label="WhatsApp">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+            </svg>
+          </a>
         </div>
       </div>
 
@@ -1556,7 +1896,7 @@
     <div class="footer-bottom">
       <div class="container">
         <p>© 2026 Fine Plastic Industries. All rights reserved. | Designed with excellence.</p>
-        <p style="margin-top: 8px; font-size: 13px;">Powered by <a href="https://tallico.onrender.com" target="_blank" style="color: #60a5fa; text-decoration: none; font-weight: 600; transition: color 0.3s ease;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#60a5fa'">Tallico</a></p>
+        <p style="margin-top: 8px; font-size: 13px;">Powered by <a href="https://tallico.onrender.com" target="_blank" rel="noopener noreferrer" style="color: #60a5fa; text-decoration: none; font-weight: 600; transition: color 0.3s ease;" onmouseover="this.style.color='#3b82f6'" onmouseout="this.style.color='#60a5fa'">Tallico</a></p>
       </div>
     </div>
   </footer>
@@ -1580,7 +1920,8 @@
     const nav = document.getElementById('nav');
 
     mobileToggle.addEventListener('click', () => {
-      nav.classList.toggle('active');
+      const isActive = nav.classList.toggle('active');
+      mobileToggle.setAttribute('aria-expanded', isActive ? 'true' : 'false');
       const icon = mobileToggle.querySelector('i');
       icon.classList.toggle('fa-bars');
       icon.classList.toggle('fa-times');
