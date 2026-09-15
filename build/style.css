@@ -24,7 +24,7 @@
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:80px}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{
-  margin:0;background:var(--wall);color:#fff;
+  margin:0;background:var(--wall);color:#fff;overflow-x:clip;
   font-family:'Atkinson Hyperlegible',system-ui,Arial,sans-serif;
   font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;
 }
@@ -90,17 +90,16 @@ section{padding-block:clamp(34px,6vw,70px)}
 @media(min-width:860px){.hdr .btn{display:inline-flex;min-height:44px;padding:9px 16px;font-size:15px}}
 
 /* ---- hero ---- */
-.hero{position:relative;padding-block:0}
+.hero{position:relative;padding-block:0;overflow:clip}
+/* full-bleed band: no side edge to notice, so the photo is the top of the page */
+.hero>.stage{border-radius:0}
 .stage{position:relative;overflow:hidden;background:var(--wall)}
-@media(max-width:899px){.stage{height:44vh;min-height:250px;max-height:400px}
-  .stage img{height:100%;object-fit:cover;object-position:center 62%}}
-.stage img{width:136%;max-width:none;margin-left:-18%;
-  -webkit-mask-image:linear-gradient(to right,transparent 0,#000 9%,#000 91%,transparent 100%),
-              linear-gradient(to bottom,transparent 0,#000 10%,#000 89%,transparent 100%);
-  mask-image:linear-gradient(to right,transparent 0,#000 9%,#000 91%,transparent 100%),
-             linear-gradient(to bottom,transparent 0,#000 10%,#000 89%,transparent 100%);
-  -webkit-mask-composite:source-in;mask-composite:intersect}
-@media(min-width:900px){.stage img{width:100%;margin-left:0}}
+@media(max-width:899px){.stage{height:42vh;min-height:240px;max-height:380px}
+  .stage img{height:100%;object-fit:cover;object-position:center 60%}}
+.stage img{width:100%}
+/* no mask fade: the photo runs #5E6B7B at the corners to #CCD0E2 at the table,
+   so no flat wall colour can meet it and the blend showed as an edge.
+   A defined panel reads as intentional instead. */
 .hero-label{position:relative;margin:-30px var(--gut) 0;padding:22px 20px 24px;z-index:2}
 .hero-label h1{font-size:clamp(32px,6.4vw,48px)}
 .hero-acts{display:flex;flex-direction:column;gap:10px;margin-top:22px}
@@ -108,10 +107,13 @@ section{padding-block:clamp(34px,6vw,70px)}
 .hero-meta{margin-top:18px;font-size:15px;color:var(--ink-2)}
 .hero-meta a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 @media(min-width:900px){
-  .hero{max-width:var(--wrap);margin:0 auto;padding-inline:var(--gut);padding-block:22px 0}
-  .hero .stage{border-radius:var(--r);height:min(52vh,470px)}
+  .hero{max-width:none;margin:0;padding:0}
+  .hero .stage{height:min(52vh,470px)}
   .hero .stage img{height:100%;object-fit:cover;object-position:center 58%}
-  .hero-label{margin:-96px 0 0;width:min(660px,82%);padding:32px 36px 34px}
+  /* the label sits at the left edge of the page's content column */
+  .hero-label{width:min(660px,calc(100% - var(--gut) * 2));
+    margin:-96px auto 0 max(var(--gut),calc((100% - var(--wrap)) / 2 + var(--gut)));
+    padding:32px 36px 34px}
   .hero-label h1{font-size:clamp(38px,3.6vw,48px)}
 }
 
@@ -257,9 +259,11 @@ footer p+p{margin-top:7px}
    Nothing is ever hidden waiting for a class to arrive.
    ========================================================= */
 @media (prefers-reduced-motion:no-preference){
-  /* a settle, not a wipe: a wipe across a photograph reads as a half-loaded image */
-  .js .hero.go .stage{animation:rise 760ms var(--out-expo) both}
-  .js .hero.go .hero-label{animation:lift 620ms var(--out-quint) 180ms both}
+  /* a settle, not a wipe: a wipe across a photograph reads as a half-loaded image.
+     .done is set by JS on animationend and by a timer, so a background tab
+     (where animations do not progress) can never hold the opacity:0 start state. */
+  .js .hero.go:not(.done) .stage{animation:rise 760ms var(--out-expo) both}
+  .js .hero.go:not(.done) .hero-label{animation:lift 620ms var(--out-quint) 180ms both}
   .js .shape .ph img{opacity:0}
   .js .shape.in .ph img{animation:tilein 500ms var(--out-quint) both}
   .js .tagbtn[aria-pressed="true"]{animation:stamp 220ms var(--out-expo)}

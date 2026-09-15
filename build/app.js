@@ -5,16 +5,19 @@
   var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- hero: the lineup assembles left to right, once ---------- */
+  /* ---------- hero: settles in once, then holds ---------- */
   var hero = $('#hero');
   if (hero && !reduce) {
     var img = $('.stage img', hero);
     var go = function () { hero.classList.add('go'); };
     if (img && img.decode) { img.decode().then(go).catch(go); } else { go(); }
     setTimeout(go, 2500);            // slow data never waits on motion
+    var done = function () { hero.classList.add('done'); };
+    hero.addEventListener('animationend', done);
+    setTimeout(done, 4000);          // a background tab never runs the animation
   } else if (hero) { hero.classList.add('go'); }
 
-  /* ---------- tags: the buyer's own labels on blank bottles ---------- */
+  /* ---------- tags: the buyer marks the shapes that look like theirs ---------- */
   var KEY = 'fpi.tags';
   var tags = [];
   try { tags = JSON.parse(sessionStorage.getItem(KEY) || '[]'); } catch (e) { tags = []; }
