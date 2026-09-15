@@ -21,7 +21,8 @@
   color-scheme:light;
 }
 *,*::before,*::after{box-sizing:border-box}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-top:80px}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;scroll-padding-bottom:64px}
+@media(min-width:860px){html{scroll-padding-top:80px;scroll-padding-bottom:0}}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{
   margin:0;background:var(--wall);color:#fff;overflow-x:clip;
@@ -46,10 +47,11 @@ p{margin:0;text-wrap:pretty}
 .label a{color:var(--ink)}
 section{padding-block:clamp(34px,6vw,70px)}
 .panel{padding:clamp(26px,4vw,52px) var(--gut)}
+.panel+.panel{margin-top:var(--gut)}
 .panel-inner{max-width:var(--wrap);margin:0 auto}
 .lede{font-size:20px;line-height:1.4;max-width:58ch;margin-top:14px}
 .muted{color:var(--ink-2)}
-.on-wall .muted{color:#fff;opacity:.9}
+.on-wall .muted{color:#fff}
 .small{font-size:15px}
 
 /* ---- buttons ---- */
@@ -66,6 +68,7 @@ section{padding-block:clamp(34px,6vw,70px)}
 .btn-wall{background:transparent;color:#fff;border-color:#fff}
 .btn-wall:hover{background:rgba(255,255,255,.14)}
 :focus-visible{outline:2px solid var(--tag);outline-offset:2px}
+.bar :focus-visible,.nojs-detail :focus-visible,.btn-send:focus-visible{outline-color:var(--ink)}
 .label :focus-visible,.hdr :focus-visible,.detail :focus-visible{outline-color:var(--ink)}
 
 /* ---- header ---- */
@@ -92,7 +95,6 @@ section{padding-block:clamp(34px,6vw,70px)}
 /* ---- hero ---- */
 .hero{position:relative;padding-block:0;overflow:clip}
 /* full-bleed band: no side edge to notice, so the photo is the top of the page */
-.hero>.stage{border-radius:0}
 .stage{position:relative;overflow:hidden;background:var(--wall)}
 @media(max-width:899px){.stage{height:42vh;min-height:240px;max-height:380px}
   .stage img{height:100%;object-fit:cover;object-position:center 60%}}
@@ -108,7 +110,7 @@ section{padding-block:clamp(34px,6vw,70px)}
 .hero-meta a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 @media(min-width:900px){
   .hero{max-width:none;margin:0;padding:0}
-  .hero .stage{height:min(74vh,620px)}
+  .hero .stage{height:clamp(540px,74vh,620px)}
   .hero .stage img{height:100%;object-fit:cover;object-position:center 60%}
   /* the label sits inside the band, so nothing hangs below it into empty wall */
   .hero-label{position:absolute;z-index:2;bottom:34px;margin:0;
@@ -128,7 +130,7 @@ section{padding-block:clamp(34px,6vw,70px)}
 
 /* ---- range strip ---- */
 .strip{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;
-  margin-top:24px;padding-bottom:6px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  margin-top:24px;padding:4px 4px 8px;margin-inline:-4px;-webkit-overflow-scrolling:touch;scrollbar-width:none}
 .strip::-webkit-scrollbar{display:none}
 .strip .shape{flex:0 0 148px;scroll-snap-align:start}
 @media(min-width:900px){
@@ -147,7 +149,8 @@ section{padding-block:clamp(34px,6vw,70px)}
 .shape .srow{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:7px}
 .num{font-family:'Anybody','Arial Black',sans-serif;font-variation-settings:'wdth' 150,'wght' 800;
   font-size:24px;line-height:1;color:#fff}
-.label .num,.detail .num{color:var(--ink)}
+.detail .num{color:var(--ink)}
+html:not(.js) .tagbtn{display:none}
 .tagbtn{min-width:44px;min-height:44px;display:inline-flex;align-items:center;justify-content:center;
   gap:6px;padding:0 10px;border:2px solid rgba(255,255,255,.55);background:transparent;color:#fff;
   border-radius:var(--r);font:inherit;font-size:14px;font-weight:700;cursor:pointer;
@@ -160,7 +163,7 @@ section{padding-block:clamp(34px,6vw,70px)}
 /* ---- catalogue ---- */
 .filters{display:grid;gap:12px;margin-top:20px}
 .fgrp{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.fgrp .cap{font-size:15px;opacity:.92;margin-right:2px}
+.fgrp .cap{font-size:15px;margin-right:2px}
 .chip{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 14px;
   border:2px solid rgba(255,255,255,.5);border-radius:var(--r);cursor:pointer;
   font-size:15px;font-weight:700;color:#fff;transition:background .16s,border-color .16s,color .16s}
@@ -168,15 +171,16 @@ section{padding-block:clamp(34px,6vw,70px)}
 .chip:hover{border-color:#fff}
 .chip:has(input:checked){background:var(--tag);border-color:var(--tag);color:var(--ink)}
 .chip:has(input:focus-visible){outline:2px solid var(--tag);outline-offset:2px}
-.fcount{font-weight:400;opacity:.72;margin-left:7px;font-size:14px}
-.fnote{font-size:15px;opacity:.9;margin-top:4px}
-.shown{font-size:15px;margin-top:14px;opacity:.92}
+.fcount{font-weight:400;margin-left:7px;font-size:14px}
+.fnote{font-size:15px;margin-top:4px}
+.shown{font-size:15px;margin-top:14px}
+@media(max-width:599px){.fcount{display:none}}
 .cat{display:grid;gap:12px;grid-template-columns:repeat(2,1fr);margin-top:18px}
 @media(min-width:600px){.cat{grid-template-columns:repeat(3,1fr);gap:16px}}
 @media(min-width:900px){.cat{grid-template-columns:repeat(4,1fr)}}
 @media(min-width:1300px){.cat{grid-template-columns:repeat(6,1fr)}}
-.prod[hidden]{display:none}
-/* filtering works with JavaScript off */
+.prod[hidden]{display:none!important}
+/* and by CSS alone with JavaScript off */
 body:has(#c-clear:checked)  .prod:not([data-colour="clear"]),
 body:has(#c-white:checked)  .prod:not([data-colour="white"]),
 body:has(#c-amber:checked)  .prod:not([data-colour="amber"]),
@@ -240,7 +244,7 @@ dialog.detail::backdrop{background:rgba(36,48,54,.86)}
 
 /* ---- thumb bar ---- */
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:30;display:grid;grid-template-columns:1fr 1fr;
-  padding-bottom:env(safe-area-inset-bottom)}
+  background:var(--wall-deep);padding-bottom:env(safe-area-inset-bottom)}
 .bar a{display:flex;align-items:center;justify-content:center;gap:8px;min-height:56px;
   text-decoration:none;font-weight:700;font-size:16px}
 .bar .call{background:var(--wall-deep);color:#fff}
@@ -263,14 +267,14 @@ footer p+p{margin-top:7px}
      .done is set by JS on animationend and by a timer, so a background tab
      (where animations do not progress) can never hold the opacity:0 start state. */
   .js .hero.go:not(.done) .stage{animation:rise 760ms var(--out-expo) both}
-  .js .hero.go:not(.done) .hero-label{animation:lift 620ms var(--out-quint) 180ms both}
-  .js .shape .ph img{opacity:0}
-  .js .shape.in .ph img{animation:tilein 500ms var(--out-quint) both}
+  .js .hero:not(.done) .hero-label{animation:lift 620ms var(--out-quint) 180ms both}
+  .js .shape .ph img{opacity:0;transition:opacity .45s var(--out-quint)}
+  .js .shape.in .ph img{opacity:1;animation:tilein 500ms var(--out-quint)}
   .js .tagbtn[aria-pressed="true"]{animation:stamp 220ms var(--out-expo)}
 }
 @keyframes rise{from{opacity:0;transform:scale(1.025)}to{opacity:1;transform:none}}
 @keyframes lift{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-@keyframes tilein{from{opacity:0;transform:scale(1.035)}to{opacity:1;transform:none}}
+@keyframes tilein{from{transform:scale(1.035)}to{transform:none}}
 @keyframes stamp{from{transform:scale(1.35) rotate(-7deg)}to{transform:none}}
 
 @media (prefers-reduced-motion:reduce){
