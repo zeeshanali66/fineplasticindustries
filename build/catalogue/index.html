@@ -38,7 +38,8 @@
 <link rel="stylesheet" href="/style.css">
 <style>
   .filters .lab{margin-right:6px}
-  .cat{display:grid;gap:26px;grid-template-columns:repeat(auto-fill,minmax(252px,1fr));padding-top:30px}
+  .cat{display:grid;gap:26px 14px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));padding-top:30px}
+  @media(min-width:560px){.cat{gap:26px;grid-template-columns:repeat(auto-fill,minmax(252px,1fr))}}
   .prod figure{margin:0}
   .prod .ph{background:var(--sheet);border:1px solid var(--rule);aspect-ratio:1/1;overflow:hidden}
   .prod .ph img{width:100%;height:100%;object-fit:cover;display:block}
@@ -85,7 +86,7 @@
       <div class="cat" id="cat">
 
         <article class="prod"><figure>
-          <div class="ph"><img src="/images/water-waisted-6-700.webp" srcset="/images/water-waisted-6-700.webp 700w, /images/water-waisted-6-1200.webp 1200w" sizes="(min-width:900px) 25vw, 92vw" width="1200" height="1200" loading="lazy" decoding="async" alt="Six clear PET bottles with a waisted body"></div>
+          <div class="ph"><img src="/images/water-waisted-6-700.webp" srcset="/images/water-waisted-6-700.webp 700w, /images/water-waisted-6-1200.webp 1200w" sizes="(min-width:900px) 25vw, 92vw" width="1200" height="1200" fetchpriority="high" alt="Six clear PET bottles with a waisted body"></div>
           <figcaption><h2>Shape 01</h2>
           <a class="ask" href="https://wa.me/923009492478?text=I%20am%20asking%20about%20shape%2001%20on%20your%20catalogue%20page.%20What%20capacities%20and%20neck%20sizes%20do%20you%20run%20it%20in%3F" rel="noopener">Ask about shape 01</a></figcaption>
         </figure></article>
