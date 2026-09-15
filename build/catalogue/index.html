@@ -1,0 +1,217 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bottle catalogue | Fine Plastic Industries, Lahore</title>
+<meta name="description" content="The full range of PET and HDPE bottles, jars and containers made by Fine Plastic Industries in Lahore. Filter by use, then send a spec for a price.">
+<link rel="canonical" href="https://fineplasticindustries.onrender.com/catalogue/">
+<meta name="theme-color" content="#F2EFE8">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="192x192" href="/favicon-192x192.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Fine Plastic Industries">
+<meta property="og:title" content="Bottle catalogue, Fine Plastic Industries">
+<meta property="og:description" content="PET and HDPE bottles, jars and handled containers, made in Lahore.">
+<meta property="og:url" content="https://fineplasticindustries.onrender.com/catalogue/">
+<meta property="og:image" content="https://fineplasticindustries.onrender.com/images/juice-square-6-1200.webp">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400..600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<style>
+  .filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:16px 0;border-bottom:1px solid var(--rule)}
+  .filters .lab{margin-right:6px}
+  .chip{font-family:'IBM Plex Mono',monospace;font-size:12px;letter-spacing:.04em;text-transform:uppercase;
+    background:transparent;border:1px solid var(--rule);color:var(--graphite);
+    padding:11px 14px;border-radius:2px;cursor:pointer;min-height:44px;
+    transition:border-color .12s,color .12s,background .12s}
+  .chip:hover{border-color:var(--ink);color:var(--ink)}
+  .chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--sheet)}
+  .cat{display:grid;gap:26px;grid-template-columns:repeat(auto-fill,minmax(252px,1fr));padding-top:30px}
+  .prod figure{margin:0}
+  .prod .ph{background:var(--sheet);border:1px solid var(--rule);aspect-ratio:1/1;overflow:hidden}
+  .prod .ph img{width:100%;height:100%;object-fit:cover;display:block}
+  .prod h2{margin:12px 0 2px;font-size:17px}
+  .prod dl{margin:10px 0 0;display:grid;grid-template-columns:auto 1fr;gap:3px 12px}
+  .prod dt{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--graphite)}
+  .prod dd{margin:0;font-family:'IBM Plex Mono',monospace;font-size:12px}
+  .prod .ask{display:inline-block;margin-top:4px;padding:15px 0;font-family:'IBM Plex Mono',monospace;font-size:12px;
+    color:var(--amber);text-decoration:underline;text-underline-offset:3px}
+  .empty{padding:40px 0;display:none}
+  .count{margin-left:auto}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap hbar">
+    <a class="brand" href="/">
+      <img class="bmark" src="/images/fpi-lockup.png" alt="Fine Plastic Industries" width="1163" height="220">
+    </a>
+    <nav class="hnav" aria-label="Main">
+      <a href="/#make">What we make</a>
+      <a href="/catalogue/">Catalogue</a>
+      <a href="/#ordering">Ordering</a>
+      <a href="/#reviews">Reviews</a>
+      <a href="/#quote">Contact</a>
+    </nav>
+    <a class="btn btn-a" href="https://wa.me/923009492478" rel="noopener">WhatsApp</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap hero" style="grid-template-columns:1fr;padding-bottom:20px">
+    <div>
+      <h1 style="max-width:18ch">Bottle catalogue</h1>
+      <p class="lead">Every shape we run today, with the material and form for each. Sizes and neck finishes depend on the mould, so they are confirmed when you enquire. New shapes are added here as moulds come online.</p>
+      <div class="acts">
+        <a class="btn btn-a" href="https://wa.me/923009492478" rel="noopener">Ask about a shape</a>
+        <a class="btn btn-o" href="/#quote">Send a full spec</a>
+      </div>
+    </div>
+  </div>
+
+  <section>
+    <div class="wrap">
+      <div class="filters">
+        <span class="lab">Filter</span>
+        <button class="chip" type="button" data-f="all" aria-pressed="true">All</button>
+        <button class="chip" type="button" data-f="water" aria-pressed="false">Water and beverage</button>
+        <button class="chip" type="button" data-f="jar" aria-pressed="false">Jars</button>
+        <button class="chip" type="button" data-f="cosmetic" aria-pressed="false">Cosmetic</button>
+        <button class="chip" type="button" data-f="pharma" aria-pressed="false">Pharmaceutical</button>
+        <button class="chip" type="button" data-f="oil" aria-pressed="false">Edible oil</button>
+        <span class="mono muted count" id="count" aria-live="polite">11 shapes</span>
+      </div>
+
+      <div class="cat" id="cat">
+
+        <article class="prod" data-c="water"><figure>
+          <div class="ph"><img src="/images/water-waisted-6-700.webp" srcset="/images/water-waisted-6-700.webp 700w, /images/water-waisted-6-1200.webp 1200w" sizes="(min-width:900px) 25vw, 92vw" width="1200" height="1200" loading="lazy" decoding="async" alt="Six clear PET bottles with a waisted body"></div>
+          <figcaption><h2>Waisted PET bottle</h2>
+          <dl><dt>Material</dt><dd>PET</dd><dt>Colour</dt><dd>Clear</dd></dl>
+          <a class="ask" href="https://wa.me/923009492478?text=I%20am%20asking%20about%20the%20waisted%20PET%20bottle." rel="noopener">Ask about this shape</a></figcaption>
+        </figure></article>
+
+        <article class="prod" data-c="water"><figure>
+          <div class="ph"><img src="/images/juice-square-6-700.webp" srcset="/images/juice-square-6-700.webp 700w, /images/juice-square-6-1200.webp 1200w" sizes="(min-width:900px) 25vw, 92vw" width="1200" height="1200" loading="lazy" decoding="async" alt="Six clear PET bottles with flat square sides, one with a green cap"></div>
+          <figcaption><h2>Flat sided PET bottle</h2>
+          <dl><dt>Material</dt><dd>PET</dd><dt>Colour</dt><dd>Clear</dd></dl>
+          <a class="ask" href="https://wa.me/923009492478?text=I%20am%20asking%20about%20the%20flat%20sided%20PET%20bottle." rel="noopener">Ask about this shape</a></figcaption>
+        </figure></article>
+
+        <article class="prod" data-c="water"><figure>
+          <div class="ph"><img src="/images/water-ribbed-5-700.webp" srcset="/images/water-ribbed-5-700.webp 700w, /images/water-ribbed-5-1200.webp 1200w" sizes="(min-width:900px) 25vw, 92vw" width="1200" height="1200" loading="lazy" decoding="async" alt="Five clear PET bottles with a diamond textured body"></div>
+          <figcaption><h2>Diamond textured PET bottle</h2>
+          <dl><dt>Material</dt><dd>PET</dd><dt>Colour</dt><dd>Clear</dd></dl>
+          <a class="ask" href="https://wa.me/923009492478?text=I%20am%20asking%20about%20the%20diamond%20textured%20PET%20bottle." rel="noopener">Ask about this shape</a></figcaption>
+        </figure></article>
+
+        <article class="prod" data-c="water"><figure>
+          <div class="ph"><img src="/images/beverage-single-redcap-700.webp" srcset="/images/beverage-single-redcap-700.webp 700w, /images/beverage-single-redcap-1200.webp 1200w" sizes="(min-width:900px) 25vw, 92vw" width="1200" height="1200" loading="lazy" decoding="async" alt="A single clear PET bottle with a red screw cap"></div>
+          <figcaption><h2>Round shoulder PET bottle</h2>
+          <dl><dt>Material</dt><dd>PET</dd><dt>Colour</dt><dd>Clear</dd></dl>
+          <a class="ask" href="https://wa.me/923009492478?text=I%20am%20asking%20about%20the%20round%20shoulder%20PET%20bottle." rel="noopener">Ask about this shape</a></figcaption>
+        </figure></article>
+
+        <article class="prod" data-c="water"><figure>
+          <div class="ph"><img src="/images/water-ribbed-pair-700.webp" srcset="/images/water-ribbed-pair-700.webp 700w, /images/water-ribbed-pair-1200.webp 1200w" sizes="(min-width:900px) 25vw, 92vw" width="1200" height="1200" loading="lazy" decoding="async" alt="Two clear PET bottles, waisted with a ribbed base"></div>
+          <figcaption><h2>Ribbed base PET bottle</h2>
+          <dl><dt>Material</dt><dd>PET</dd><dt>Colour</dt><dd>Clear</dd></dl>
+          <a class="ask" href="https://wa.me/923009492478?text=I%20am%20asking%20about%20the%20ribbed%20base%20PET%20bottle." rel="noopener">Ask about this shape</a></figcaption>
+        </figure></article>
+
+        <article class="prod" data-c="jar"><figure>
+          <div class="ph"><img src="/images/jars-3-sizes-700.webp" srcset="/images/jars-3-sizes-700.webp 700w, /images/jars-3-sizes-1200.webp 1200w" sizes="(min-width:900px) 25vw, 92vw" width="1200" height="1200" loading="lazy" decoding="async" alt="Three clear PET jars in descending sizes with wide openings"></div>
+          <figcaption><h2>Wide mouth PET jar</h2>
+          <dl><dt>Material</dt><dd>PET</dd><dt>Colour</dt><dd>Clear</dd></dl>
+          <a class="ask" href="https://wa.me/923009492478?text=I%20am%20asking%20about%20the%20wide%20mouth%20PET%20jar." rel="noopener">Ask about this shape</a></figcaption>
+        </figure></article>
+
+        <article class="prod" data-c="cosmetic"><figure>
+          <div class="ph"><img src="/images/cosmetic-large-pump-700.webp" srcset="/images/cosmetic-large-pump-700.webp 700w, /images/cosmetic-large-pump-1200.webp 1200w" sizes="(min-width:900px) 25vw, 92vw" width="1200" height="1200" loading="lazy" decoding="async" alt="A large clear PET bottle with an hourglass body and a screw neck"></div>
+          <figcaption><h2>Hourglass PET bottle</h2>
+          <dl><dt>Material</dt><dd>PET</dd><dt>Colour</dt><dd>Clear</dd></dl>
+          <a class="ask" href="https://wa.me/923009492478?text=I%20am%20asking%20about%20the%20hourglass%20PET%20bottle." rel="noopener">Ask about this shape</a></figcaption>
+        </figure></article>
+
+        <article class="prod" data-c="cosmetic"><figure>
+          <div class="ph"><img src="/images/cosmetic-black-cylinder-700.webp" srcset="/images/cosmetic-black-cylinder-700.webp 700w, /images/cosmetic-black-cylinder-1200.webp 1200w" sizes="(min-width:900px) 25vw, 92vw" width="1200" height="1200" loading="lazy" decoding="async" alt="A black opaque cylindrical bottle with a flat shoulder"></div>
+          <figcaption><h2>Black cylinder</h2>
+          <dl><dt>Colour</dt><dd>Black</dd></dl>
+          <a class="ask" href="https://wa.me/923009492478?text=I%20am%20asking%20about%20the%20black%20cylinder%20bottle." rel="noopener">Ask about this shape</a></figcaption>
+        </figure></article>
+
+        <article class="prod" data-c="pharma"><figure>
+          <div class="ph"><img src="/images/pharma-amber-syrup-700.webp" srcset="/images/pharma-amber-syrup-700.webp 700w, /images/pharma-amber-syrup-1200.webp 1200w" sizes="(min-width:900px) 25vw, 92vw" width="1200" height="1200" loading="lazy" decoding="async" alt="Three amber PET syrup bottles in descending sizes"></div>
+          <figcaption><h2>Amber PET syrup bottle</h2>
+          <dl><dt>Material</dt><dd>PET</dd><dt>Colour</dt><dd>Amber</dd></dl>
+          <a class="ask" href="https://wa.me/923009492478?text=I%20am%20asking%20about%20the%20amber%20PET%20syrup%20bottle." rel="noopener">Ask about this shape</a></figcaption>
+        </figure></article>
+
+        <article class="prod" data-c="pharma"><figure>
+          <div class="ph"><img src="/images/pharma-amber-vials-700.webp" srcset="/images/pharma-amber-vials-700.webp 700w, /images/pharma-amber-vials-1200.webp 1200w" sizes="(min-width:900px) 25vw, 92vw" width="1200" height="1200" loading="lazy" decoding="async" alt="Eight slim amber PET cylinders standing in a row"></div>
+          <figcaption><h2>Amber PET slim cylinder</h2>
+          <dl><dt>Material</dt><dd>PET</dd><dt>Colour</dt><dd>Amber</dd></dl>
+          <a class="ask" href="https://wa.me/923009492478?text=I%20am%20asking%20about%20the%20amber%20PET%20slim%20cylinder." rel="noopener">Ask about this shape</a></figcaption>
+        </figure></article>
+
+        <article class="prod" data-c="oil"><figure>
+          <div class="ph"><img src="/images/hdpe-handled-range-700.webp" srcset="/images/hdpe-handled-range-700.webp 700w, /images/hdpe-handled-range-1200.webp 1200w" sizes="(min-width:900px) 25vw, 92vw" width="1200" height="1200" loading="lazy" decoding="async" alt="A row of white HDPE containers with moulded handles and coloured caps"></div>
+          <figcaption><h2>Handled HDPE container</h2>
+          <dl><dt>Material</dt><dd>HDPE</dd><dt>Colour</dt><dd>White, coloured caps</dd></dl>
+          <a class="ask" href="https://wa.me/923009492478?text=I%20am%20asking%20about%20the%20handled%20HDPE%20container." rel="noopener">Ask about this shape</a></figcaption>
+        </figure></article>
+
+      </div>
+
+      <p class="empty mono muted" id="empty">No shapes in that group yet. Ask us anyway, we may have the mould.</p>
+
+      <p class="mono muted" style="padding:34px 0">Looking for a shape that is not here? Send a sample or a drawing and we will tell you whether we can run it.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p class="mono muted">Fine Plastic Industries · Lahore, Punjab · <a href="tel:+923009492478">+92 300 9492478</a> · <a href="mailto:fineplasticindustry@yahoo.com">fineplasticindustry@yahoo.com</a> · Mon to Sat, 9am to 6pm</p>
+    <p class="mono muted" style="margin-top:8px">&copy; 2026 Fine Plastic Industries · Site by <a href="https://azektra.com" rel="noopener">AZEKTRA</a></p>
+  </div>
+</footer>
+
+<nav class="bar" aria-label="Contact">
+  <a class="call" href="tel:+923009492478">Call</a>
+  <a class="wa" href="https://wa.me/923009492478" rel="noopener">WhatsApp</a>
+</nav>
+
+<script>
+(function(){
+  var chips=[].slice.call(document.querySelectorAll('.chip'));
+  var items=[].slice.call(document.querySelectorAll('.prod'));
+  var count=document.getElementById('count');
+  var empty=document.getElementById('empty');
+  function apply(f){
+    var n=0;
+    items.forEach(function(el){
+      var show = f==='all' || el.getAttribute('data-c')===f;
+      el.hidden = !show;
+      if(show) n++;
+    });
+    chips.forEach(function(c){ c.setAttribute('aria-pressed', String(c.getAttribute('data-f')===f)); });
+    count.textContent = n + (n===1 ? ' shape' : ' shapes');
+    empty.style.display = n ? 'none' : 'block';
+  }
+  chips.forEach(function(c){
+    c.addEventListener('click', function(){ apply(c.getAttribute('data-f')); });
+  });
+  apply('all');
+})();
+</script>
+</body>
+</html>
