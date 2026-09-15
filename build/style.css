@@ -13,7 +13,7 @@
   --send:#33D977;         /* "send": WhatsApp only, never anything else */
   --send-press:#00AF61;
   --bubble:#E1F7CD;
-  --wrap:1180px;
+  --wrap:1460px;
   --gut:clamp(18px,4vw,40px);
   --out-expo:cubic-bezier(.16,1,.3,1);
   --out-quint:cubic-bezier(.22,1,.36,1);
@@ -29,7 +29,7 @@ body{
   font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased;
 }
 @media(min-width:900px){body{font-size:18px}}
-img{max-width:100%;display:block}
+img{max-width:100%;display:block;height:auto}
 a{color:inherit}
 h1,h2,h3{font-family:'Anybody','Arial Black',system-ui,sans-serif;
   font-variation-settings:'wdth' 125,'wght' 700;
@@ -108,10 +108,11 @@ section{padding-block:clamp(34px,6vw,70px)}
 .hero-meta{margin-top:18px;font-size:15px;color:var(--ink-2)}
 .hero-meta a{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
 @media(min-width:900px){
-  .hero{display:grid;grid-template-columns:minmax(300px,500px) 1fr;align-items:center;
-    max-width:var(--wrap);margin:0 auto;padding-inline:var(--gut);padding-block:20px 0}
-  .hero .stage{order:2;border-radius:var(--r)}
-  .hero-label{order:1;margin:0 -48px 0 0;padding:38px 36px 40px}
+  .hero{max-width:var(--wrap);margin:0 auto;padding-inline:var(--gut);padding-block:22px 0}
+  .hero .stage{border-radius:var(--r);height:min(52vh,470px)}
+  .hero .stage img{height:100%;object-fit:cover;object-position:center 58%}
+  .hero-label{margin:-96px 0 0;width:min(660px,82%);padding:32px 36px 34px}
+  .hero-label h1{font-size:clamp(38px,3.6vw,48px)}
 }
 
 /* ---- what we make ---- */
@@ -255,30 +256,21 @@ footer p+p{margin-top:7px}
    Gated on .js so the no-JS page is the finished end state.
    Nothing is ever hidden waiting for a class to arrive.
    ========================================================= */
-@property --sweep{syntax:'<percentage>';inherits:true;initial-value:100%}
 @media (prefers-reduced-motion:no-preference){
-  /* the lineup assembles left to right, like bottles coming off the line */
-  .js .hero .stage img{
-    -webkit-mask-image:linear-gradient(to right,transparent 0,#000 9%,#000 91%,transparent 100%),
-                linear-gradient(to bottom,transparent 0,#000 10%,#000 89%,transparent 100%),
-                linear-gradient(90deg,#000 0,#000 var(--sweep),transparent calc(var(--sweep) + 10%));
-    mask-image:linear-gradient(to right,transparent 0,#000 9%,#000 91%,transparent 100%),
-               linear-gradient(to bottom,transparent 0,#000 10%,#000 89%,transparent 100%),
-               linear-gradient(90deg,#000 0,#000 var(--sweep),transparent calc(var(--sweep) + 10%));
-    -webkit-mask-composite:source-in;mask-composite:intersect}
-  .js .hero.go .stage img{animation:sweep 1150ms var(--out-expo) both}
-  .js .hero.go .hero-label{animation:rollon 620ms var(--out-quint) 240ms both}
+  /* a settle, not a wipe: a wipe across a photograph reads as a half-loaded image */
+  .js .hero.go .stage{animation:rise 760ms var(--out-expo) both}
+  .js .hero.go .hero-label{animation:lift 620ms var(--out-quint) 180ms both}
   .js .shape .ph img{opacity:0}
   .js .shape.in .ph img{animation:tilein 500ms var(--out-quint) both}
   .js .tagbtn[aria-pressed="true"]{animation:stamp 220ms var(--out-expo)}
 }
-@keyframes sweep{from{--sweep:0%}to{--sweep:112%}}
-@keyframes rollon{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0)}}
+@keyframes rise{from{opacity:0;transform:scale(1.025)}to{opacity:1;transform:none}}
+@keyframes lift{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
 @keyframes tilein{from{opacity:0;transform:scale(1.035)}to{opacity:1;transform:none}}
 @keyframes stamp{from{transform:scale(1.35) rotate(-7deg)}to{transform:none}}
 
 @media (prefers-reduced-motion:reduce){
-  .js .hero .stage img,.js .hero .hero-label,.js .shape .ph img{
-    animation:none!important;clip-path:none!important;opacity:1!important;transform:none!important}
+  .js .hero .stage,.js .hero .hero-label,.js .shape .ph img{
+    animation:none!important;opacity:1!important;transform:none!important}
   *,::before,::after{animation-duration:.001ms!important;transition-duration:.001ms!important}
 }
