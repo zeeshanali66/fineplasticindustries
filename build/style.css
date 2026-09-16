@@ -251,11 +251,10 @@ body.has-bar{padding-bottom:calc(56px + env(safe-area-inset-bottom))}
   background:var(--surface-2);overflow:hidden;min-height:150px}
 .m-tile .ph{aspect-ratio:4/3;overflow:hidden;background:var(--surface-2)}
 .makes .m-water .ph{aspect-ratio:16/10}
-@media(min-width:900px){.makes .m-water .ph{aspect-ratio:auto;height:calc(100% - 76px)}}
+@media(min-width:900px){.makes .m-water .ph{aspect-ratio:auto;height:calc(100% - 53px)}}
 .m-tile .ph img{width:100%;height:100%;object-fit:cover}
 .m-tile .cap{padding:14px 16px 16px}
 .m-tile h3{font-size:19px}
-.m-tile p{margin-top:4px;font-size:15px;color:var(--ink-2)}
 .make-note{margin-top:24px;font-size:16px;color:var(--ink-2)}
 
 /* ---- point at a shape / range strip ---- */
