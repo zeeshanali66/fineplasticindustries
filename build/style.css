@@ -177,7 +177,7 @@ section{padding-block:clamp(40px,7vw,88px)}
 footer{background:var(--amber-deep);color:#fff;font-size:15px}
 .f-grid{display:grid;gap:32px;padding-block:clamp(32px,5vw,56px) 20px}
 @media(min-width:700px){.f-grid{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1000px){.f-grid{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1000px){.f-grid{grid-template-columns:repeat(3,1fr)}}
 .f-grid h3{font-family:inherit;font-weight:700;font-size:16px;color:#fff;margin-bottom:12px}
 .f-grid .fname{font-family:'Besley','Rockwell','Roboto Slab',Georgia,serif;font-weight:800;
   font-size:19px;color:#fff;margin-bottom:8px}
@@ -256,12 +256,6 @@ body.has-bar{padding-bottom:calc(56px + env(safe-area-inset-bottom))}
 .m-tile .cap{padding:14px 16px 16px}
 .m-tile h3{font-size:19px}
 .m-tile p{margin-top:4px;font-size:15px;color:var(--ink-2)}
-.m-tile.amber{background:var(--amber);color:#fff}
-.m-tile.amber .cap{padding:22px 20px}
-.m-tile.amber p{color:#fff;opacity:.92}
-.makes .m-injection{display:flex;align-items:center;min-height:auto}
-.makes .m-injection .cap{padding:22px 20px}
-@media(min-width:900px){.makes .m-injection .cap{max-width:70ch}}
 .make-note{margin-top:24px;font-size:16px;color:var(--ink-2)}
 
 /* ---- point at a shape / range strip ---- */
@@ -289,41 +283,11 @@ body.has-bar{padding-bottom:calc(56px + env(safe-area-inset-bottom))}
 .tagbtn[aria-pressed="true"]{background:var(--yellow);border-color:var(--ink-2);color:var(--ink)}
 html:not(.js) .tagbtn{display:none}
 
-/* ---- catalogue filters + grid ---- */
-.filters{display:grid;gap:14px;margin-top:22px}
-.fgrp{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.fgrp .cap{font-size:15px;font-weight:700;margin-right:4px}
-.chip{position:relative;display:inline-flex;align-items:center;min-height:44px;padding:0 14px;
-  border:1px solid var(--ink-2);border-radius:var(--r);cursor:pointer;
-  font-size:15px;font-weight:600;color:var(--ink);transition:background .15s,border-color .15s}
-.chip input{position:absolute;opacity:0;width:100%;height:100%;left:0;top:0;margin:0;cursor:pointer}
-.chip:hover{border-color:var(--ink)}
-.chip:has(input:checked){background:var(--yellow);border-color:var(--ink-2)}
-.chip:has(input:focus-visible){outline:2px solid var(--amber);outline-offset:2px}
-.fcount{font-weight:400;margin-left:6px;font-size:13px;color:var(--ink-2)}
-@media(max-width:599px){.fcount{display:none}}
-.shown{font-size:15px;margin-top:14px;color:var(--ink-2)}
-
+/* ---- catalogue grid ---- */
 .cat{display:grid;gap:10px;grid-template-columns:repeat(2,1fr);margin-top:20px}
 @media(min-width:600px){.cat{grid-template-columns:repeat(3,1fr);gap:14px}}
 @media(min-width:900px){.cat{grid-template-columns:repeat(4,1fr)}}
 @media(min-width:1300px){.cat{grid-template-columns:repeat(6,1fr)}}
-.prod[hidden]{display:none!important}
-/* filtering works with JavaScript off */
-body:has(#u-water:checked) .prod:not([data-use~="water"]),
-body:has(#u-cosmetic:checked) .prod:not([data-use~="cosmetic"]),
-body:has(#u-pharma:checked) .prod:not([data-use~="pharma"]),
-body:has(#u-oil:checked) .prod:not([data-use~="oil"]),
-body:has(#u-household:checked) .prod:not([data-use~="household"]),
-body:has(#c-clear:checked) .prod:not([data-colour="clear"]),
-body:has(#c-white:checked) .prod:not([data-colour="white"]),
-body:has(#c-amber:checked) .prod:not([data-colour="amber"]),
-body:has(#c-black:checked) .prod:not([data-colour="black"]),
-body:has(#c-red:checked) .prod:not([data-colour="red"]),
-body:has(#f-bottle:checked) .prod:not([data-form="bottle"]),
-body:has(#f-jar:checked) .prod:not([data-form="jar"]),
-body:has(#f-handle:checked) .prod:not([data-form="handle"])
-{display:none}
 
 /* ---- detail dialog ---- */
 dialog.detail{border:0;padding:0;background:#fff;color:var(--ink);
@@ -363,9 +327,6 @@ dialog.detail::backdrop{background:rgba(63,26,3,.82)}
 .row-block .ph img{width:100%;height:100%;object-fit:cover}
 .row-block figcaption{margin-top:8px;font-size:14px;color:var(--ink-2)}
 .row-block .ph.ph-map{aspect-ratio:8/5}
-.amber-panel{background:var(--amber);color:#fff;padding:clamp(24px,4vw,40px);border-radius:0}
-.amber-panel p{font-size:17px;line-height:1.5}
-.amber-panel p+p{margin-top:10px}
 
 .dl-plain{display:grid;gap:14px;margin-top:20px}
 @media(min-width:700px){.dl-plain{grid-template-columns:1fr 1fr;gap:14px 32px}}

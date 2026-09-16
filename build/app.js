@@ -145,61 +145,13 @@
 
   paint();
 
-  /* ---------- catalogue: counts, shown-of, and the detail dialog ---------- */
+  /* ---------- catalogue: the detail dialog ---------- */
   var cat = $('#cat');
   if (cat) {
     var prods = $$('.prod', cat);
-    var shown = $('#shown');
-
-    var checkedValue = function (name) {
-      var el = $('input[name="' + name + '"]:checked');
-      return el ? el.value : 'all';
-    };
-
-    var count = function () {
-      var uv = checkedValue('use'), cv = checkedValue('colour'), fv = checkedValue('form');
-      prods.forEach(function (p) {
-        var uses = (p.dataset.use || '').split(' ');
-        var okU = uv === 'all' || uses.indexOf(uv) > -1;
-        var okC = cv === 'all' || p.dataset.colour === cv;
-        var okF = fv === 'all' || p.dataset.form === fv;
-        p.hidden = !(okU && okC && okF);
-      });
-      var n = prods.filter(function (p) { return !p.hidden; }).length;
-      if (shown) shown.textContent = n === 0
-        ? 'No shape matches these filters. Set one row back to All.'
-        : (n === prods.length ? 'Showing all ' + n + ' shapes'
-                              : 'Showing ' + n + ' of ' + prods.length + ' shapes');
-    };
-    /* preselect from ?use=, and keep the URL in sync so a filtered view is shareable */
-    (function () {
-      var want = new URLSearchParams(location.search).get('use');
-      var pre = want && document.getElementById('u-' + want);
-      if (pre) pre.checked = true;
-    })();
-    $$('input[name="use"], input[name="colour"], input[name="form"]').forEach(function (i) {
-      i.addEventListener('change', function () {
-        count();
-        var uv = checkedValue('use');
-        var qs = uv === 'all' ? '' : '?use=' + uv;
-        history.replaceState(null, '', location.pathname + qs + location.hash);
-      });
-    });
-    count();
-
-    $$('.fcount').forEach(function (s) {
-      var k = s.dataset.k, val = s.dataset.v;
-      var n;
-      if (val === 'all') { n = prods.length; }
-      else if (k === 'use') { n = prods.filter(function (p) { return (p.dataset.use || '').split(' ').indexOf(val) > -1; }).length; }
-      else { n = prods.filter(function (p) { return p.dataset[k] === val; }).length; }
-      s.textContent = ' ' + n;
-    });
 
     var dlg = $('#detail');
-    var visible = function () {
-      return prods.filter(function (p) { return p.offsetParent !== null; });
-    };
+    var visible = function () { return prods; };
     if (dlg && dlg.showModal) {
       var cur = 0;
       var fill = function (i) {
