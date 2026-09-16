@@ -1,22 +1,10 @@
 (function () {
   'use strict';
   try {
-  var WA = 'https://wa.me/923009492478?text=';
+  var WA_BASE = 'https://wa.me/923009492478';
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* ---------- hero: settles in once, then holds ---------- */
-  var hero = $('#hero');
-  if (hero && !reduce) {
-    var img = $('.stage img', hero);
-    var go = function () { hero.classList.add('go'); };
-    if (img && img.decode) { img.decode().then(go).catch(go); } else { go(); }
-    setTimeout(go, 2500);            // slow data never waits on motion
-    var done = function () { hero.classList.add('done'); };
-    hero.addEventListener('animationend', done);
-    setTimeout(done, 4000);          // a background tab never runs the animation
-  } else if (hero) { hero.classList.add('go'); }
 
   /* ---------- tags: the buyer marks the shapes that look like theirs ---------- */
   var KEY = 'fpi.tags';
@@ -32,24 +20,69 @@
     var list = tags.slice().sort();
     var which = list.length === 1 ? 'shape ' + list[0]
       : 'shapes ' + list.slice(0, -1).join(', ') + ' and ' + list[list.length - 1];
-    return 'Assalam o alaikum. From your catalogue I am interested in ' + which +
+    return 'Assalam o alaikum. From your website I am interested in ' + which +
       '. Please tell me the capacities and neck sizes you run these in.';
+  }
+
+  function shapeData() {
+    var el = document.getElementById('shapeData');
+    if (!el) return {};
+    try { return JSON.parse(el.textContent) || {}; } catch (e) { return {}; }
   }
 
   function paint() {
     try { sessionStorage.setItem(KEY, JSON.stringify(tags)); } catch (e) {}
-    $$('.tagbtn').forEach(function (b) {
-      b.setAttribute('aria-pressed', tags.indexOf(b.dataset.tag) > -1 ? 'true' : 'false');
-    });
     var n = tags.length;
-    /* the header button says the count in words, so the badge is for the bar only */
-    $$('#wabar .tagn').forEach(function (s) { s.textContent = n ? ' · ' + n : ''; });
-    $$('.hdr .btn-send .tagn').forEach(function (s) { s.textContent = ''; });
-    $$('.hdr .btn-send').forEach(function (a) {
-      a.firstChild.nodeValue = n ? 'Send ' + n + ' shape' + (n > 1 ? 's' : '') : 'WhatsApp';
+
+    $$('.tagbtn').forEach(function (b) {
+      var on = tags.indexOf(b.dataset.tag) > -1;
+      b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      var lab = b.querySelector('.tag-label');
+      if (lab) lab.textContent = on ? 'Tagged' : 'Tag';
     });
-    var href = n ? WA + encodeURIComponent(message()) : 'https://wa.me/923009492478';
-    $$('#wabar, .hdr .btn-send, .hero-acts .btn-send').forEach(function (a) { a.href = href; });
+
+    var href = n ? WA_BASE + '?text=' + encodeURIComponent(message()) : WA_BASE;
+
+    var hdrWa = $('#hdrWa');
+    if (hdrWa) {
+      hdrWa.href = href;
+      hdrWa.innerHTML = n
+        ? 'Send ' + n + ' shape' + (n > 1 ? 's' : '')
+        : 'WhatsApp<span class="n"> +92 300 9492478</span>';
+    }
+    $$('.bar .wa').forEach(function (a) {
+      a.href = href;
+      var badge = a.querySelector('.badge');
+      if (badge) badge.textContent = n ? ' · ' + n : '';
+    });
+
+    /* quote page: small thumbnails of every tagged shape, each removable */
+    var list = $('#taggedList');
+    if (list) {
+      var data = shapeData();
+      list.innerHTML = '';
+      tags.slice().sort().forEach(function (id) {
+        var row = data[id];
+        if (!row) return;
+        var chip = document.createElement('span');
+        chip.className = 'tchip';
+        chip.innerHTML = '<span class="num" style="font-size:16px">' + id + '</span>';
+        var rm = document.createElement('button');
+        rm.type = 'button';
+        rm.setAttribute('aria-label', 'Remove shape ' + id);
+        rm.textContent = '×';
+        rm.addEventListener('click', function () {
+          var i = tags.indexOf(id);
+          if (i > -1) { tags.splice(i, 1); paint(); refreshForm(); }
+        });
+        chip.appendChild(rm);
+        list.appendChild(chip);
+      });
+      var wrap = $('#taggedWrap');
+      if (wrap) wrap.hidden = tags.length === 0;
+    }
+
+    if (typeof refreshForm === 'function') refreshForm();
   }
 
   document.addEventListener('click', function (e) {
@@ -59,37 +92,24 @@
     if (i > -1) { tags.splice(i, 1); } else { tags.push(n); }
     paint();
   });
-  paint();
 
-  /* ---------- strip progress ---------- */
-  var strip = $('#strip'), prog = $('#prog');
-  if (strip && prog) {
-    var onScroll = function () {
-      var max = strip.scrollWidth - strip.clientWidth;
-      var p = max > 0 ? strip.scrollLeft / max : 0;
-      prog.style.width = Math.max(10, 10 + p * 90) + '%';
-    };
-    strip.addEventListener('scroll', onScroll, { passive: true });
-    onScroll();
-  }
-
-  /* ---------- tiles fade in as they arrive ---------- */
-  if (!reduce && 'IntersectionObserver' in window) {
-    var io = new IntersectionObserver(function (es) {
-      es.forEach(function (en) {
-        if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
-      });
-    }, { rootMargin: '80px' });
-    $$('.shape').forEach(function (s) { io.observe(s); });
-    /* an observer that never fires (hidden tab, odd engine) must not leave the
-       grid blank, so everything is shown unconditionally shortly after load */
-    setTimeout(function () { $$('.shape').forEach(function (s) { s.classList.add('in'); }); }, 3000);
-  } else {
-    $$('.shape').forEach(function (s) { s.classList.add('in'); });
+  /* ---------- mobile menu: enhance the native <details>, not required for it to work ---------- */
+  var menu = $('.menu');
+  if (menu) {
+    document.addEventListener('click', function (e) {
+      if (menu.open && !menu.contains(e.target)) menu.removeAttribute('open');
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && menu.open) {
+        menu.removeAttribute('open');
+        $('summary', menu).focus();
+      }
+    });
   }
 
   /* ---------- quote form: live preview of the message ---------- */
   var form = $('#qf');
+  var refreshForm = null;
   if (form) {
     var v = function (id) { var e = document.getElementById(id); return e && e.value ? e.value.trim() : ''; };
     var compose = function () {
@@ -107,21 +127,23 @@
       return L.join('\n');
     };
     var preview = $('#preview');
-    var refresh = function () {
+    refreshForm = function () {
       if (preview) preview.textContent = compose();
       var m = $('#mailto');
       if (m) m.href = 'mailto:fineplasticindustry@yahoo.com?subject=' +
         encodeURIComponent('Quote request') + '&body=' + encodeURIComponent(compose());
     };
-    form.addEventListener('input', refresh);
-    form.addEventListener('change', refresh);
-    refresh();
+    form.addEventListener('input', refreshForm);
+    form.addEventListener('change', refreshForm);
+    refreshForm();
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var url = WA + encodeURIComponent(compose());
+      var url = WA_BASE + '?text=' + encodeURIComponent(compose());
       if (!window.open(url, '_blank', 'noopener')) location.href = url;
     });
   }
+
+  paint();
 
   /* ---------- catalogue: counts, shown-of, and the detail dialog ---------- */
   var cat = $('#cat');
@@ -129,26 +151,37 @@
     var prods = $$('.prod', cat);
     var shown = $('#shown');
 
+    var checkedValue = function (name) {
+      var el = $('input[name="' + name + '"]:checked');
+      return el ? el.value : 'all';
+    };
+
     var count = function () {
-      var col = $('input[name="colour"]:checked'), form = $('input[name="form"]:checked');
-      var cv = col ? col.value : 'all', fv = form ? form.value : 'all';
+      var uv = checkedValue('use'), cv = checkedValue('colour'), fv = checkedValue('form');
       prods.forEach(function (p) {
-        p.hidden = !((cv === 'all' || p.dataset.colour === cv) &&
-                     (fv === 'all' || p.dataset.form === fv));
+        var uses = (p.dataset.use || '').split(' ');
+        var okU = uv === 'all' || uses.indexOf(uv) > -1;
+        var okC = cv === 'all' || p.dataset.colour === cv;
+        var okF = fv === 'all' || p.dataset.form === fv;
+        p.hidden = !(okU && okC && okF);
       });
       var n = prods.filter(function (p) { return !p.hidden; }).length;
       if (shown) shown.textContent = n === 0
-        ? 'No shape matches both filters. Set one row back to All.'
+        ? 'No shape matches these filters. Set one row back to All.'
         : (n === prods.length ? 'Showing all ' + n + ' shapes'
                               : 'Showing ' + n + ' of ' + prods.length + ' shapes');
     };
-    $$('.chip input').forEach(function (i) { i.addEventListener('change', count); });
+    $$('input[name="use"], input[name="colour"], input[name="form"]').forEach(function (i) {
+      i.addEventListener('change', count);
+    });
     count();
 
     $$('.fcount').forEach(function (s) {
       var k = s.dataset.k, val = s.dataset.v;
-      var n = val === 'all' ? prods.length
-        : prods.filter(function (p) { return p.dataset[k] === val; }).length;
+      var n;
+      if (val === 'all') { n = prods.length; }
+      else if (k === 'use') { n = prods.filter(function (p) { return (p.dataset.use || '').split(' ').indexOf(val) > -1; }).length; }
+      else { n = prods.filter(function (p) { return p.dataset[k] === val; }).length; }
       s.textContent = ' ' + n;
     });
 
@@ -166,13 +199,16 @@
         $('#d-img', dlg).src = im.currentSrc || im.src;
         $('#d-img', dlg).alt = im.alt;
         $('#d-num', dlg).textContent = n;
-        $('#d-colour', dlg).textContent = 'Shown in ' + p.dataset.colour;
-        $('#d-ask', dlg).href = WA + encodeURIComponent(
+        $('#d-colour', dlg).textContent = 'Photographed in ' + p.dataset.colour;
+        $('#d-ask', dlg).href = WA_BASE + '?text=' + encodeURIComponent(
           'Assalam o alaikum. I am looking at Shape ' + n +
           ' on your catalogue. Please tell me the capacities and neck sizes you run it in.');
         var t = $('#d-tag', dlg);
         t.dataset.tag = n;
-        t.setAttribute('aria-pressed', tags.indexOf(n) > -1 ? 'true' : 'false');
+        var on = tags.indexOf(n) > -1;
+        t.setAttribute('aria-pressed', on ? 'true' : 'false');
+        var lab = t.querySelector('.tag-label');
+        if (lab) lab.textContent = on ? 'Tagged' : 'Tag this shape';
       };
       cat.addEventListener('click', function (e) {
         var a = e.target.closest('.ph');
@@ -192,7 +228,7 @@
     }
   }
   } catch (err) {
-    /* anything unexpected: fall back to the no-JS end state rather than a blank grid */
+    /* anything unexpected: fall back to the no-JS end state rather than a broken page */
     document.documentElement.classList.remove('js');
     if (window.console) console.error('fpi:', err);
   }
