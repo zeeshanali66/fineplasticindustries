@@ -171,8 +171,19 @@
         : (n === prods.length ? 'Showing all ' + n + ' shapes'
                               : 'Showing ' + n + ' of ' + prods.length + ' shapes');
     };
+    /* preselect from ?use=, and keep the URL in sync so a filtered view is shareable */
+    (function () {
+      var want = new URLSearchParams(location.search).get('use');
+      var pre = want && document.getElementById('u-' + want);
+      if (pre) pre.checked = true;
+    })();
     $$('input[name="use"], input[name="colour"], input[name="form"]').forEach(function (i) {
-      i.addEventListener('change', count);
+      i.addEventListener('change', function () {
+        count();
+        var uv = checkedValue('use');
+        var qs = uv === 'all' ? '' : '?use=' + uv;
+        history.replaceState(null, '', location.pathname + qs + location.hash);
+      });
     });
     count();
 
