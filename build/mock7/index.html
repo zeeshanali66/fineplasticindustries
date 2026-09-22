@@ -122,13 +122,9 @@ p{margin:0}
 .sp:hover .ph{transform:translateY(-3px)}
 .sp:hover img{scale:1.045}
 .sp:focus-visible .ph{outline:3px solid var(--wa);outline-offset:3px}
-.sp .lab{display:grid;grid-template-columns:auto 1fr;column-gap:9px;
-  align-items:baseline;padding:10px 2px 0}
-.sp .no{grid-column:1;grid-row:1;font-size:clamp(19px,1.8vw,25px);font-weight:700;
+.sp .lab{display:block;padding:9px 2px 0}
+.sp .no{font-size:clamp(19px,1.8vw,25px);font-weight:700;
   letter-spacing:-.04em;font-variant-numeric:tabular-nums;line-height:1}
-.sp .nm{grid-column:2;grid-row:1;font-size:12.5px;line-height:1.25;
-  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.sp .mt{grid-column:2;grid-row:2;font-size:12.5px;line-height:1.5;opacity:.55}
 .sp[aria-pressed="true"] .ph{box-shadow:0 0 0 3px var(--wa)}
 .sp[aria-pressed="true"] .no{color:#12833F}
 .sp .tick{position:absolute;right:8px;top:8px;width:26px;height:26px;border-radius:50%;
@@ -136,11 +132,6 @@ p{margin:0}
   justify-content:center;font-size:14px;font-weight:700}
 .sp[aria-pressed="true"] .tick{display:flex}
 
-/* the withdrawn numbers are part of the story, so they are shown, not hidden */
-.gap{display:flex;align-items:center;justify-content:center;border:1px dashed var(--line);
-  border-radius:3px;aspect-ratio:3/4;color:#B4B4B6;font-size:clamp(19px,1.8vw,25px);
-  font-weight:700;letter-spacing:-.04em;font-variant-numeric:tabular-nums}
-.gap span{text-decoration:line-through}
 
 /* ---------- quiet blocks ---------- */
 .lines{display:grid;gap:clamp(20px,2.4vw,34px);
@@ -160,17 +151,24 @@ p{margin:0}
 
 /* ---------- tray ---------- */
 .tray{position:fixed;left:0;right:0;bottom:0;z-index:50;transform:translateY(105%);
-  background:var(--deep);color:#fff;display:flex;align-items:center;gap:16px;
-  padding:12px var(--pad);transition:transform .38s var(--ease);
+  background:var(--deep);color:#fff;display:flex;flex-wrap:wrap;align-items:center;
+  gap:10px 14px;padding:12px var(--pad);transition:transform .38s var(--ease);
   padding-bottom:calc(12px + env(safe-area-inset-bottom))}
 .tray.on{transform:none}
-.tray .lbl{font-size:11px;color:#97979A;text-transform:uppercase;letter-spacing:.07em}
-.tray .list{font-variant-numeric:tabular-nums;font-weight:600;font-size:17px;
-  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}
-.tray .sp2{margin-left:auto}
+.tray .who{margin-right:auto;min-width:0}
+.tray .lbl{display:block;font-size:11px;color:#97979A;text-transform:uppercase;letter-spacing:.07em}
+.tray .list{display:block;font-variant-numeric:tabular-nums;font-weight:600;font-size:17px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tray .acts{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tray button.wa{border:0;cursor:pointer;font-family:inherit}
+.tray .alt{display:inline-flex;align-items:center;min-height:44px;padding:10px 14px;
+  border:1px solid rgba(255,255,255,.24);border-radius:3px;color:#fff;
+  text-decoration:none;font-size:14px;font-weight:500}
+.tray .alt:hover{border-color:#fff}
 .tray .clr{background:none;border:0;color:#97979A;font:inherit;font-size:14px;
   cursor:pointer;padding:10px;min-height:44px}
 .tray .clr:hover{color:#fff}
+.tray .hint{flex-basis:100%;margin:0;font-size:12.5px;line-height:1.4;color:#A5A5A8}
 </style>
 </head>
 <body>
@@ -206,7 +204,7 @@ p{margin:0}
 <section class="sec" id="index">
   <div class="sec-head">
     <h2>Some of what we run</h2>
-    <p class="note">These are the shapes we have photographed so far, and there is more on the floor, so ask if you do not see yours. Tap the ones that look close and they collect at the bottom to go over in one message. The numbers never move: a struck-out one is a shape we withdrew, and nothing after it shifts up.</p>
+    <p class="note">These are the shapes we have photographed so far, and there is more on the floor, so ask if you do not see yours. Tap the ones that look close and send them to us on WhatsApp in one go.</p>
   </div>
   <div class="grid" id="grid"></div>
 </section>
@@ -245,14 +243,17 @@ p{margin:0}
   <span>Mock 7</span>
 </div>
 
-<div class="tray" id="tray" role="status">
-  <div>
+<div class="tray" id="tray" role="region" aria-label="Tagged shapes">
+  <div class="who">
     <span class="lbl">Tagged</span>
-    <span class="list" id="trayList"></span>
+    <span class="list" id="trayList" aria-live="polite"></span>
   </div>
-  <span class="sp2"></span>
-  <a class="wa" id="traySend" href="https://wa.me/923009492478" target="_blank" rel="noopener">Send on WhatsApp</a>
-  <button class="clr" id="trayClr">Clear</button>
+  <div class="acts">
+    <button class="wa" id="trayPhotos" type="button" hidden>Send photos</button>
+    <a class="wa" id="traySend" href="https://wa.me/923009492478" target="_blank" rel="noopener">Send on WhatsApp</a>
+    <button class="clr" id="trayClr" type="button">Clear</button>
+  </div>
+  <p class="hint" id="trayHint" hidden>WhatsApp will ask who to send to: choose Fine Plastic Industries. Never messaged us before? Send the numbers instead.</p>
 </div>
 
 <script>
@@ -312,59 +313,137 @@ if(window.IntersectionObserver){
   rows.forEach(function(r){io.observe(r);});
 }
 
-/* id, slug, ground sampled from that photo's own border, name, material */
+/* id, image, ground colour sampled from that photo's own border.
+   No shape names: the number is the name, and it is the one thing that is
+   always right. */
 var S=[
-["01","water-waisted-6","#75665A","Waisted body","Clear PET"],
-["02","juice-square-6","#74655A","Square sides","Clear PET"],
-["03","water-ribbed-5","#69635A","Diamond texture","Clear PET"],
-["04","water-ribbed-pair","#686259","Waisted, ribbed base","Clear PET"],
-["05","beverage-single-redcap","#877972","Round, red cap","Clear PET"],
-["06","jars-3-sizes","#7C6C5F","Wide-mouth jars","Clear PET"],
-["07","cosmetic-large-pump","#4A3834","Hourglass body","Clear PET"],
-["08","cosmetic-black-cylinder","#D9DCE9","Flat-shoulder cylinder","Black"],
-["09",null],
-["10","pharma-amber-syrup","#E3E7F7","Syrup bottles","Amber PET"],
-["11","pharma-amber-vials","#D1D9E7","Slim vials","Amber PET"],
-["12","hdpe-handled-range","#7A6A60","Handled, large","White HDPE"],
-["13","clear-straight-cylinder","#939499","Straight cylinder","Clear PET"],
-["14","clear-ribbed-round","#7D7E85","Ribbed round","Clear PET"],
-["15","clear-twist-bluecap","#797C88","Twisted body","Blue tint"],
-["16","white-round-short","#6E7280","Round, short","White"],
-["17","white-slim-cylinder","#797981","Slim cylinder","White"],
-["18","white-ribbed-round","#7F8087","Three-rib round","White"],
-["19",null],
-["20","white-cylinder-capped","#777A83","Straight cylinder","White"],
-["21","white-round-wide","#868785","Round, wide","White"],
-["22","clear-tall-cylinder","#7E828D","Tall cylinder","Clear PET"],
-["23","white-tall-slim","#71767D","Tall slim","White"],
-["24","white-tapered-shoulder","#655D69","Tapered shoulder","White"]
+["01","water-waisted-6","#75665A"],
+["02","juice-square-6","#74655A"],
+["03","water-ribbed-5","#69635A"],
+["04","water-ribbed-pair","#686259"],
+["05","beverage-single-redcap","#877972"],
+["06","jars-3-sizes","#7C6C5F"],
+["07","cosmetic-large-pump","#4A3834"],
+["08","cosmetic-black-cylinder","#D9DCE9"],
+["09","shape-09","#ADA094"],
+["10","pharma-amber-syrup","#E3E7F7"],
+["11","pharma-amber-vials","#D1D9E7"],
+["12","hdpe-handled-range","#7A6A60"],
+["13","clear-straight-cylinder","#939499"],
+["14","shape-14","#A89A8D"],
+["15","clear-twist-bluecap","#797C88"],
+["16","white-round-short","#6E7280"],
+["17","white-slim-cylinder","#797981"],
+["18","white-ribbed-round","#7F8087"],
+["19","white-tapered-shoulder","#655D69"],
+["20","white-cylinder-capped","#777A83"],
+["21","white-round-wide","#868785"],
+["22","clear-tall-cylinder","#7E828D"],
+["23","white-tall-slim","#71767D"]
 ];
+var IMG={};
+S.forEach(function(r){IMG[r[0]]=r[1];});
 
-var grid=document.getElementById('grid'),live=0;
-S.forEach(function(r){
-  if(r[1]===null){
-    var d=document.createElement('div');
-    d.className='gap';
-    d.innerHTML='<span>'+r[0]+'</span>';
-    d.title='Shape '+r[0]+' was withdrawn';
-    grid.appendChild(d);
-    return;
-  }
+var grid=document.getElementById('grid');
+S.forEach(function(r,i){
   var b=document.createElement('button');
   b.className='sp';b.type='button';b.dataset.id=r[0];
   b.style.setProperty('--g',r[2]);
   b.setAttribute('aria-pressed','false');
-  b.setAttribute('aria-label','Shape '+r[0]+', '+r[3]+', '+r[4]);
+  b.setAttribute('aria-label','Shape '+r[0]);
   b.innerHTML='<span class="ph"><img src="/images/'+r[1]+'-700.webp" alt="" '
-    +(live<6?'':'loading="lazy"')+'>'
+    +(i<6?'':'loading="lazy"')+'>'
     +'<span class="tick" aria-hidden="true">&#10003;</span></span>'
-    +'<span class="lab"><span class="no">'+r[0]+'</span>'
-    +'<span class="nm">'+r[3]+'</span><span class="mt">'+r[4]+'</span></span>';
-  grid.appendChild(b);live++;
+    +'<span class="lab"><span class="no">'+r[0]+'</span></span>';
+  grid.appendChild(b);
 });
 
+var WA_DISPLAY='+92 300 9492478';
 var tags=[],tray=document.getElementById('tray'),
-    tl=document.getElementById('trayList'),ts=document.getElementById('traySend');
+    tl=document.getElementById('trayList'),ts=document.getElementById('traySend'),
+    tp=document.getElementById('trayPhotos'),th=document.getElementById('trayHint');
+
+function message(t){
+  return 'Hello Fine Plastic Industries. I am interested in shape '+t.join(', ')+'.';
+}
+
+/* Photos go through the phone's own share sheet, the only way a web page can
+   hand WhatsApp a real image. The sheet cannot pre-select the chat, so every
+   photo carries its shape number printed on it and still says what it is
+   wherever it lands, even if WhatsApp drops the caption. Desktop keeps the
+   plain link, which opens WhatsApp Web straight into our chat. */
+var photoMode=!!(window.File&&navigator.share&&navigator.canShare)
+  &&matchMedia('(pointer:coarse)').matches;
+var files={},pending={};
+
+function stamp(id){
+  if(pending[id])return pending[id];
+  var fontReady=document.fonts?document.fonts.load('700 30px Archivo'):Promise.resolve();
+  pending[id]=fontReady.catch(function(){}).then(function(){
+    return new Promise(function(res,rej){
+      var img=new Image();
+      img.onload=function(){
+        var W=img.naturalWidth,H=img.naturalHeight,
+            bar=Math.round(W*.12),m=Math.round(bar*.38);
+        var c=document.createElement('canvas');
+        c.width=W;c.height=H+bar;
+        var x=c.getContext('2d');
+        x.drawImage(img,0,0);
+        x.fillStyle='#131314';x.fillRect(0,H,W,bar);
+        x.textBaseline='middle';x.fillStyle='#fff';
+        x.font='700 '+Math.round(bar*.44)+'px Archivo,Arial,sans-serif';
+        x.fillText('Shape '+id,m,H+bar/2);
+        x.textAlign='right';x.fillStyle='#B9B9BB';
+        x.font='400 '+Math.round(bar*.25)+'px Archivo,Arial,sans-serif';
+        x.fillText('Fine Plastic Industries  '+WA_DISPLAY,W-m,H+bar/2);
+        c.toBlob(function(b){
+          if(!b)return rej(new Error('encode'));
+          files[id]=new File([b],'fine-plastic-shape-'+id+'.jpg',{type:'image/jpeg'});
+          res(files[id]);
+        },'image/jpeg',.9);
+      };
+      img.onerror=function(){rej(new Error('load'));};
+      img.src='/images/'+IMG[id]+'-700.webp';
+    });
+  });
+  pending[id].catch(function(){delete pending[id];});
+  return pending[id];
+}
+
+function openText(){location.href=ts.href;}
+
+function sendPhotos(){
+  var t=tags.slice().sort();
+  var go=function(){
+    var list=t.map(function(id){return files[id];}).filter(Boolean);
+    var data={files:list,text:message(t)};
+    var ok=false;
+    try{ok=list.length===t.length&&navigator.canShare(data);}catch(e){}
+    if(!ok){openText();return;}
+    navigator.share(data).catch(function(err){
+      if(err&&err.name==='AbortError')return; /* they closed the sheet on purpose */
+      openText();
+    });
+  };
+  if(t.every(function(id){return files[id];})){go();return;}
+  /* Not built yet. The tap stays valid for a few seconds, so wait briefly
+     rather than silently doing nothing, then fall back to the text link. */
+  var done=false;
+  var timer=setTimeout(function(){if(!done){done=true;openText();}},2500);
+  Promise.all(t.map(stamp)).then(function(){
+    if(done)return;done=true;clearTimeout(timer);go();
+  },function(){
+    if(done)return;done=true;clearTimeout(timer);openText();
+  });
+}
+
+if(photoMode){
+  tp.hidden=false;th.hidden=false;
+  ts.classList.remove('wa');ts.classList.add('alt');
+  ts.textContent='Send numbers instead';
+  tp.addEventListener('click',sendPhotos);
+}
+
 function paint(){
   var t=tags.slice().sort();
   document.querySelectorAll('.sp').forEach(function(el){
@@ -372,8 +451,10 @@ function paint(){
   });
   tray.classList.toggle('on',t.length>0);
   tl.textContent=t.join('  ');
-  ts.href=WA+'?text='+encodeURIComponent(
-    'Hello Fine Plastic Industries. I am interested in shape '+t.join(', ')+'.');
+  ts.href=WA+'?text='+encodeURIComponent(message(t));
+  tp.textContent=t.length>1?'Send '+t.length+' photos':'Send photo';
+  /* build the photos while they are still choosing, so the send tap is instant */
+  if(photoMode)t.forEach(function(id){stamp(id).catch(function(){});});
 }
 grid.addEventListener('click',function(e){
   var b=e.target.closest('.sp');
