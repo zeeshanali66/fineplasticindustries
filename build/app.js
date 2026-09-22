@@ -2,6 +2,7 @@
   'use strict';
   try {
   var WA_BASE = 'https://wa.me/923009492478';
+  var WA_DISPLAY = '+92 300 9492478';
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return [].slice.call((r || document).querySelectorAll(s)); };
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -22,6 +23,12 @@
       : 'shapes ' + list.slice(0, -1).join(', ') + ' and ' + list[list.length - 1];
     return 'Assalam o alaikum. From your website I am interested in ' + which +
       '. Please tell me the capacities and neck sizes you run these in.';
+  }
+
+  /* The share sheet cannot name a recipient, so a buyer who has not saved us
+     would not know which chat to pick. Say who it is for inside the message. */
+  function withRecipient(text) {
+    return text + '\n\nTo: Fine Plastic Industries, ' + WA_DISPLAY + ' (' + WA_BASE + ')';
   }
 
   function shapeData() {
@@ -169,25 +176,21 @@
     paint();
   });
 
-  /* The header and bottom-bar buttons stay plain wa.me links on purpose. A
-     wa.me link opens the chat with our number already in it; the share sheet
-     cannot name a recipient, so sending photos that way would leave a buyer
-     who has not saved us picking a contact they do not have. Photos are an
-     opt-in extra below, never the default path. */
-
-  /* the opt-in: only shown when shapes are tagged and the browser can share files */
+  /* With shapes tagged, the photos are what the factory actually needs, so
+     they go first where the browser can send files. The cost is that the
+     share sheet cannot pick the recipient, which is why the message names us
+     and carries the number. Anywhere files cannot be shared, this falls
+     straight through to the wa.me link, which does open our chat directly. */
   document.addEventListener('click', function (e) {
     if (!e.target.closest) return;
-    var b = e.target.closest('.send-photos');
-    if (!b) return;
-    e.preventDefault();
-    var text = b.dataset.withSpec === '1' && typeof compose === 'function'
-      ? compose() : message();
-    if (!shareTagged(text, b.dataset.fallback || WA_BASE)) openWa(b.dataset.fallback || WA_BASE);
+    var a = e.target.closest('#hdrWa, .bar .wa');
+    if (!a || !tags.length || !shareFiles) return;
+    if (shareTagged(withRecipient(message()), a.href)) e.preventDefault();
   });
 
+  /* the direct-chat escape hatch, shown once photos become the main action */
   function paintPhotoButtons() {
-    $$('.send-photos').forEach(function (b) {
+    $$('.chat-direct').forEach(function (b) {
       b.hidden = !(tags.length && shareFiles);
     });
   }
@@ -237,7 +240,10 @@
     refreshForm();
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      openWa(WA_BASE + '?text=' + encodeURIComponent(compose()));
+      var url = WA_BASE + '?text=' + encodeURIComponent(compose());
+      /* tagged shapes: send their photos with the spec, else the plain link */
+      if (shareTagged(withRecipient(compose()), url)) return;
+      openWa(url);
     });
   }
 

@@ -373,7 +373,7 @@ dialog.detail::backdrop{background:rgba(63,26,3,.82)}
 .ask .ask-steps{margin-top:22px}
 .ask .ask-phone{margin-top:18px}
 .ask .ask-photos{margin-top:14px;justify-self:start}
-.send-photos[hidden]{display:none}
+.chat-direct[hidden]{display:none}
 @media(min-width:900px){
   /* one DOM order (fields, preview, submit, tagged, notes, steps, phone) serves both
      layouts: on mobile the form renders top to bottom as written, and here the form
