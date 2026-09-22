@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Share test</title>
+<style>
+  body{font:16px/1.5 system-ui,sans-serif;margin:0;padding:20px;max-width:640px}
+  h1{font-size:20px;margin:0 0 4px}
+  p.sub{color:#555;margin:0 0 20px}
+  button{font:inherit;font-weight:700;padding:16px 20px;width:100%;margin:8px 0;
+    border:2px solid #1A1410;background:#fff;border-radius:3px;cursor:pointer}
+  button.go{background:#25D366;border-color:#25D366}
+  pre{background:#F2F2F2;padding:14px;border-radius:3px;white-space:pre-wrap;
+    word-break:break-word;font-size:14px;margin:16px 0}
+  .ok{color:#0a7d2e;font-weight:700}
+  .no{color:#b3261e;font-weight:700}
+</style>
+</head>
+<body>
+<h1>Share test</h1>
+<p class="sub">Temporary. Tap the buttons in order, then send me a screenshot of the grey box.</p>
+
+<pre id="out">checking…</pre>
+
+<button id="b1">1. Build the photo files</button>
+<button id="b2" class="go">2. Try to share them</button>
+<button id="b3">3. Try sharing ONE file, no text</button>
+
+<script>
+var out = document.getElementById('out');
+var lines = [];
+function log(s) { lines.push(s); out.textContent = lines.join('\n'); }
+
+var ua = navigator.userAgent;
+log('UA: ' + ua.slice(0, 120));
+log('secure context: ' + window.isSecureContext);
+log('navigator.share: ' + (typeof navigator.share));
+log('navigator.canShare: ' + (typeof navigator.canShare));
+log('File: ' + (typeof File));
+
+var files = [];
+
+document.getElementById('b1').onclick = function () {
+  lines = lines.slice(0, 5); log('--- building ---');
+  var names = ['water-waisted-6', 'water-ribbed-5'];
+  var t0 = Date.now();
+  Promise.all(names.map(function (n, i) {
+    return fetch('/images/' + n + '-700.webp')
+      .then(function (r) { log(n + ' fetch: ' + r.status); return r.blob(); })
+      .then(function (b) {
+        log(n + ' blob: ' + b.type + ' ' + Math.round(b.size / 1024) + 'KB');
+        return new Promise(function (res) {
+          var url = URL.createObjectURL(b), img = new Image();
+          img.onload = function () {
+            var c = document.createElement('canvas');
+            c.width = img.naturalWidth; c.height = img.naturalHeight;
+            c.getContext('2d').drawImage(img, 0, 0);
+            c.toBlob(function (o) {
+              URL.revokeObjectURL(url);
+              log(n + ' -> jpeg: ' + (o ? Math.round(o.size / 1024) + 'KB' : 'FAILED'));
+              res(o ? new File([o], 'shape-' + i + '.jpg', { type: 'image/jpeg' }) : null);
+            }, 'image/jpeg', 0.85);
+          };
+          img.onerror = function () { log(n + ' -> image decode FAILED'); res(null); };
+          img.src = url;
+        });
+      })
+      .catch(function (e) { log(n + ' ERROR: ' + e.message); return null; });
+  })).then(function (f) {
+    files = f.filter(Boolean);
+    log('built ' + files.length + ' files in ' + (Date.now() - t0) + 'ms');
+    try {
+      log('canShare({files}): ' + (navigator.canShare ? navigator.canShare({ files: files }) : 'n/a'));
+      log('canShare({files,text}): ' + (navigator.canShare ? navigator.canShare({ files: files, text: 'hi' }) : 'n/a'));
+    } catch (e) { log('canShare threw: ' + e.message); }
+  });
+};
+
+document.getElementById('b2').onclick = function () {
+  if (!files.length) { log('!! press 1 first'); return; }
+  log('--- sharing ' + files.length + ' files + text ---');
+  try {
+    navigator.share({ files: files, text: 'test from the website' })
+      .then(function () { log('share RESOLVED (sheet opened)'); })
+      .catch(function (e) { log('share REJECTED: ' + e.name + ' - ' + e.message); });
+  } catch (e) { log('share THREW: ' + e.name + ' - ' + e.message); }
+};
+
+document.getElementById('b3').onclick = function () {
+  if (!files.length) { log('!! press 1 first'); return; }
+  log('--- sharing 1 file, no text ---');
+  try {
+    navigator.share({ files: [files[0]] })
+      .then(function () { log('single-file share RESOLVED'); })
+      .catch(function (e) { log('single-file REJECTED: ' + e.name + ' - ' + e.message); });
+  } catch (e) { log('single-file THREW: ' + e.name + ' - ' + e.message); }
+};
+</script>
+</body>
+</html>
