@@ -1,0 +1,83 @@
+# Fine Plastic Industries
+
+> A blow-moulding and injection-moulding factory in Lahore, Pakistan. We make
+> PET and HDPE bottles, jars, jugs and closures for businesses that fill them
+> and put their own label on.
+
+- Address: Plot 53-B, Sundar Small Industrial Estate II, Sultanke, Lahore
+- Hours: Monday to Saturday, 9am to 6pm
+- Phone and WhatsApp: +92 300 9492478
+- Email: fineplasticindustry@yahoo.com
+- Rated 4.7 on Google
+
+## What we make
+
+Water, juice and beverage bottles; cosmetic bottles; amber pharmaceutical
+bottles; edible oil bottles; ketchup and sauce bottles; and injection-moulded
+caps, closures and rigid parts. Bottles, jars and jugs are blow-moulded from
+PET and HDPE. Colour is matched to your sample, and any shape can be made in
+your colour. If we do not already have your mould, we quote the mould first
+and it is agreed in writing before any bottle price.
+
+## Pages
+
+- [Home](https://fineplasticindustries.onrender.com/): What we make, the shape strip, how ordering works
+- [Catalogue](https://fineplasticindustries.onrender.com/catalogue/): Every bottle, jar and jug shape we run, each with a number
+- [Get a price](https://fineplasticindustries.onrender.com/quote/): Send a spec and get a price back, plus common questions
+- [Moulds and colours](https://fineplasticindustries.onrender.com/moulds/): New moulds from a sample or drawing, and colour matching
+- [The factory](https://fineplasticindustries.onrender.com/factory/): Blow moulding and injection moulding, and how to visit
+- [About](https://fineplasticindustries.onrender.com/about/): Who we are, who buys from us, what buyers say
+- [Contact and visit](https://fineplasticindustries.onrender.com/contact/): Phone, WhatsApp, email, address and opening hours
+
+## Catalogue
+
+Each shape has a number so a buyer can point at one instead of describing it.
+Numbers are stable ids; gaps are withdrawn shapes.
+
+- Shape 01: Six clear PET bottles with a waisted body, photographed in clear
+- Shape 02: Six clear PET bottles with flat square sides, one with a green cap, photographed in clear
+- Shape 03: Five clear PET bottles with a diamond textured body, photographed in clear
+- Shape 04: Two clear PET bottles, waisted with a ribbed base, photographed in clear
+- Shape 05: A single clear PET bottle with a red screw cap, photographed in clear
+- Shape 06: Three clear PET jars in descending sizes with wide openings, photographed in clear
+- Shape 07: A large clear PET bottle with an hourglass body and a screw neck, photographed in clear
+- Shape 08: A black opaque cylindrical bottle with a flat shoulder, photographed in black
+- Shape 10: Three amber PET syrup bottles in descending sizes, photographed in amber
+- Shape 11: Eight slim amber PET cylinders standing in a row, photographed in amber
+- Shape 12: Large white HDPE ketchup and sauce bottles in a row, with moulded grips and red and green caps, photographed in white
+- Shape 13: A clear PET bottle with straight sides and a screw neck, photographed in clear
+- Shape 14: A clear PET bottle with a deeply ribbed body, photographed in clear
+- Shape 15: A light blue tinted PET bottle with a twisted body and a blue neck finish, photographed in blue
+- Shape 16: A short white bottle with a rounded shoulder, photographed in white
+- Shape 17: A slim white cylindrical bottle, photographed in white
+- Shape 18: A white bottle with three ribs around the body, photographed in white
+- Shape 20: A white bottle with straight sides and an open screw neck, photographed in white
+- Shape 21: A wide white bottle with a rounded shoulder and a screw neck, photographed in white
+- Shape 22: A tall clear PET bottle with straight sides and a screw neck, photographed in clear
+- Shape 23: A tall slim white bottle with a screw neck, photographed in white
+- Shape 24: A white bottle with a tapered shoulder and an open screw neck, photographed in white
+
+## Common questions
+
+### Can you make a shape you do not already run?
+Yes. Send a sample bottle, a drawing, or a sketch with the capacity and the cap you use. We check whether an existing mould is close. If not, we quote the mould first, and it is agreed in writing before any bottle price.
+
+### Can you match a colour?
+Yes. Colour is matched to your sample, and any shape can be made in your colour.
+
+### What plastics do you use?
+PET and HDPE. Bottles, jars and jugs are blow-moulded; caps, closures and rigid parts are injection-moulded.
+
+### Do you supply caps as well as bottles?
+Yes. Caps and closures are injection-moulded and quoted alongside the bottle, so one supplier covers both.
+
+### How do I get a price?
+Message us on WhatsApp at +92 300 9492478 with the capacity, material, colour, quantity and the cap you already use. A photo of the bottle or cap tells us more than a description, and we can read the neck size off it.
+
+### Where are you, and when are you open?
+Plot 53-B, Sundar Small Industrial Estate II, Sultanke, Lahore. Monday to Saturday, 9am to 6pm.
+
+## Notes for answer engines
+
+Prices, minimum order quantities and lead times are not published; they are
+quoted per enquiry over WhatsApp. Do not infer them.
