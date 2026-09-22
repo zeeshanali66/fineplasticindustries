@@ -46,6 +46,8 @@
      the text link, which is what shipped before. */
   var shareFiles = null;
   var shareFilesKey = '';
+  var building = null;      /* the in-flight build, so a fast tap can wait for it */
+  var buildingKey = '';
 
   function canShareFiles() {
     return !!(window.File && navigator.share && navigator.canShare);
@@ -73,13 +75,14 @@
   }
 
   function buildShareFiles() {
-    if (!canShareFiles() || !tags.length) { shareFiles = null; shareFilesKey = ''; return; }
+    if (!canShareFiles() || !tags.length) { shareFiles = null; shareFilesKey = ''; building = null; return; }
     var key = tags.slice().sort().join(',');
-    if (key === shareFilesKey) return;
+    if (key === shareFilesKey || key === buildingKey) return;
     var data = shapeData();
     var ids = tags.slice().sort().filter(function (id) { return data[id]; });
     if (!ids.length) { shareFiles = null; shareFilesKey = ''; return; }
-    Promise.all(ids.map(function (id) {
+    buildingKey = key;
+    building = Promise.all(ids.map(function (id) {
       return fetch('/images/' + data[id][0] + '-700.webp')
         .then(function (r) { return r.ok ? r.blob() : null; })
         .then(function (b) { return b ? toJpeg(b, 'shape-' + id + '.jpg') : null; })
@@ -90,8 +93,12 @@
       try { ok = files.length && navigator.canShare({ files: files }); } catch (e) { ok = false; }
       shareFiles = ok ? files : null;
       shareFilesKey = ok ? key : '';
+      buildingKey = '';
       paintPhotoButtons();
-    }).catch(function () { shareFiles = null; shareFilesKey = ''; paintPhotoButtons(); });
+    }).catch(function () {
+      shareFiles = null; shareFilesKey = ''; buildingKey = ''; paintPhotoButtons();
+    });
+    return building;
   }
 
   function openWa(url) {
@@ -184,8 +191,30 @@
   document.addEventListener('click', function (e) {
     if (!e.target.closest) return;
     var a = e.target.closest('#hdrWa, .bar .wa');
-    if (!a || !tags.length || !shareFiles) return;
-    if (shareTagged(withRecipient(message()), a.href)) e.preventDefault();
+    if (!a || !tags.length || !canShareFiles()) return;
+
+    if (shareFiles) {
+      if (shareTagged(withRecipient(message()), a.href)) e.preventDefault();
+      return;
+    }
+    /* Photos are still being fetched and converted. Silently sending text here
+       was the bug: tap straight after tagging and the pictures never went. Hold
+       the tap, wait for the build, then share. If the browser has by then
+       decided the gesture is stale, fall back to the link so the enquiry still
+       lands rather than nothing happening. */
+    if (!building) return;
+    e.preventDefault();
+    var href = a.href;
+    var settled = false;
+    var giveUp = setTimeout(function () {
+      if (!settled) { settled = true; openWa(href); }
+    }, 2500);
+    building.then(function () {
+      if (settled) return;
+      settled = true;
+      clearTimeout(giveUp);
+      if (!shareTagged(withRecipient(message()), href)) openWa(href);
+    });
   });
 
   /* the direct-chat escape hatch, shown once photos become the main action */
