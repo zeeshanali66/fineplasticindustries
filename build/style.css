@@ -372,6 +372,8 @@ dialog.detail::backdrop{background:rgba(63,26,3,.82)}
 .ask .ask-neck{margin-top:14px}
 .ask .ask-steps{margin-top:22px}
 .ask .ask-phone{margin-top:18px}
+.ask .ask-photos{margin-top:14px;justify-self:start}
+.send-photos[hidden]{display:none}
 @media(min-width:900px){
   /* one DOM order (fields, preview, submit, tagged, notes, steps, phone) serves both
      layouts: on mobile the form renders top to bottom as written, and here the form
@@ -381,8 +383,9 @@ dialog.detail::backdrop{background:rgba(63,26,3,.82)}
   .ask form{display:contents}
   .ask .fields{grid-column:1;grid-row:1}
   .ask .sub{grid-column:1;grid-row:2;margin-top:20px}
-  .ask .ask-noscript{grid-column:1;grid-row:3}
-  .ask .ask-steps{grid-column:1;grid-row:4}
+  .ask .ask-photos{grid-column:1;grid-row:3}
+  .ask .ask-noscript{grid-column:1;grid-row:4}
+  .ask .ask-steps{grid-column:1;grid-row:5}
   .ask .bubble{grid-column:2;grid-row:1;margin-top:0}
   .ask #taggedWrap{grid-column:2;grid-row:2}
   .ask .ask-neck{grid-column:2;grid-row:3}

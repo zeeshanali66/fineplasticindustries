@@ -83,7 +83,8 @@
       try { ok = files.length && navigator.canShare({ files: files }); } catch (e) { ok = false; }
       shareFiles = ok ? files : null;
       shareFilesKey = ok ? key : '';
-    }).catch(function () { shareFiles = null; shareFilesKey = ''; });
+      paintPhotoButtons();
+    }).catch(function () { shareFiles = null; shareFilesKey = ''; paintPhotoButtons(); });
   }
 
   function openWa(url) {
@@ -157,6 +158,7 @@
     }
 
     if (typeof refreshForm === 'function') refreshForm();
+    paintPhotoButtons();
   }
 
   document.addEventListener('click', function (e) {
@@ -167,14 +169,28 @@
     paint();
   });
 
-  /* the header and bottom-bar WhatsApp buttons carry the tagged shapes: send
-     the photos where the browser allows it, otherwise follow the link as before */
+  /* The header and bottom-bar buttons stay plain wa.me links on purpose. A
+     wa.me link opens the chat with our number already in it; the share sheet
+     cannot name a recipient, so sending photos that way would leave a buyer
+     who has not saved us picking a contact they do not have. Photos are an
+     opt-in extra below, never the default path. */
+
+  /* the opt-in: only shown when shapes are tagged and the browser can share files */
   document.addEventListener('click', function (e) {
     if (!e.target.closest) return;
-    var a = e.target.closest('#hdrWa, .bar .wa');
-    if (!a || !tags.length || !shareFiles) return;
-    if (shareTagged(message(), a.href)) e.preventDefault();
+    var b = e.target.closest('.send-photos');
+    if (!b) return;
+    e.preventDefault();
+    var text = b.dataset.withSpec === '1' && typeof compose === 'function'
+      ? compose() : message();
+    if (!shareTagged(text, b.dataset.fallback || WA_BASE)) openWa(b.dataset.fallback || WA_BASE);
   });
+
+  function paintPhotoButtons() {
+    $$('.send-photos').forEach(function (b) {
+      b.hidden = !(tags.length && shareFiles);
+    });
+  }
 
   /* ---------- mobile menu: enhance the native <details>, not required for it to work ---------- */
   var menu = $('.menu');
@@ -221,10 +237,7 @@
     refreshForm();
     form.addEventListener('submit', function (e) {
       e.preventDefault();
-      var url = WA_BASE + '?text=' + encodeURIComponent(compose());
-      /* with shapes tagged, send their photos alongside the spec */
-      if (shareTagged(compose(), url)) return;
-      openWa(url);
+      openWa(WA_BASE + '?text=' + encodeURIComponent(compose()));
     });
   }
 
