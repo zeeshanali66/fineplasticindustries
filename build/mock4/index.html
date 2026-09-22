@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Mock 4 — Fine Plastic Industries</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#FFFDFB;
+  --soft:#F5F1EC;
+  --deep:#41230D;
+  --ink:#1C1512;
+  --ink-2:#6A6059;
+  --amber:#C25610;
+  --amber-deep:#8A3B08;
+  --amber-wash:#FDF2E9;
+  --line:#EAE3DB;
+  --send:#25D366;
+  --wrap:1240px;
+  --gut:clamp(20px,4vw,48px);
+  --arch:999px 999px 18px 18px;
+  --r:24px;
+  --pill:999px;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);
+  font-family:'Outfit',system-ui,sans-serif;font-size:17px;line-height:1.6;font-weight:300;
+  -webkit-font-smoothing:antialiased;overflow-x:clip}
+@media(min-width:900px){body{font-size:18px}}
+img{display:block;max-width:100%;height:auto}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:var(--wrap);margin:0 auto;padding-inline:var(--gut)}
+p{margin:0}
+
+/* display face carries the character; body stays plain and legible */
+h1,h2,.display{font-family:'Fraunces',Georgia,serif;font-weight:300;
+  letter-spacing:-.018em;line-height:1.02;margin:0;text-wrap:balance;
+  font-variation-settings:'opsz' 120,'SOFT' 40}
+h1{font-size:clamp(42px,6.4vw,78px)}
+h2{font-size:clamp(30px,3.8vw,48px)}
+h3{font-family:'Outfit',sans-serif;font-weight:400;font-size:19px;margin:0;letter-spacing:-.01em}
+em{font-style:italic;color:var(--amber)}
+.lede{font-size:clamp(17px,1.35vw,19px);color:var(--ink-2);max-width:50ch;margin-top:18px}
+.kicker{font-size:13px;letter-spacing:.09em;text-transform:uppercase;color:var(--amber);font-weight:400}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:54px;
+  padding:15px 28px;border-radius:var(--pill);font-size:16px;font-weight:400;
+  border:1px solid transparent;cursor:pointer;
+  transition:background .25s var(--ease),transform .14s var(--ease),border-color .25s,color .25s}
+.btn:active{transform:scale(.985)}
+.btn-send{background:var(--send);color:#08290F;font-weight:500}
+.btn-send:hover{background:#3EE084}
+.btn-line{border-color:var(--line);background:transparent}
+.btn-line:hover{border-color:var(--amber);color:var(--amber)}
+.btn-ghost{border-color:rgba(255,255,255,.38);color:#fff}
+.btn-ghost:hover{background:rgba(255,255,255,.1)}
+
+/* ---------- header ---------- */
+header{position:sticky;top:0;z-index:30;background:rgba(255,253,251,.86);
+  backdrop-filter:saturate(1.6) blur(16px);border-bottom:1px solid var(--line)}
+.hbar{display:flex;align-items:center;gap:22px;min-height:70px}
+.mark{font-family:'Fraunces',serif;font-weight:400;font-size:21px;letter-spacing:-.02em;margin-right:auto}
+.mark em{font-style:normal}
+nav.top{display:none;gap:2px}
+@media(min-width:960px){nav.top{display:flex}}
+nav.top a{padding:9px 16px;border-radius:var(--pill);font-size:16px;color:var(--ink-2);
+  transition:background .2s,color .2s}
+nav.top a:hover{background:var(--soft);color:var(--ink)}
+nav.top a.on{background:var(--amber-wash);color:var(--amber-deep)}
+.hdr-cta{min-height:44px;padding:10px 20px;font-size:15px}
+
+/* ---------- hero: type leads, product answers ---------- */
+.hero{position:relative;padding:clamp(40px,6vw,88px) 0 clamp(30px,4vw,60px)}
+.hero::before{content:"";position:absolute;inset:auto auto 0 50%;width:min(1400px,120vw);
+  height:70%;transform:translateX(-50%);background:
+  radial-gradient(60% 80% at 72% 55%, rgba(194,86,16,.09), transparent 70%);
+  pointer-events:none;z-index:0}
+.hero .wrap{position:relative;z-index:1;display:grid;gap:clamp(28px,4vw,50px);align-items:center}
+@media(min-width:960px){.hero .wrap{grid-template-columns:1.06fr .94fr}}
+.hero-art{position:relative}
+.hero-arch{border-radius:var(--arch);overflow:hidden;background:var(--soft);aspect-ratio:4/5;
+  max-height:600px;box-shadow:0 24px 60px -30px rgba(28,21,18,.4)}
+.hero-arch img{width:100%;height:100%;object-fit:cover}
+.badge{position:absolute;right:-6px;bottom:24px;background:var(--paper);border:1px solid var(--line);
+  border-radius:var(--pill);padding:12px 20px;display:flex;align-items:center;gap:10px;
+  box-shadow:0 10px 30px -14px rgba(28,21,18,.35)}
+.badge b{font-family:'Fraunces',serif;font-weight:400;font-size:26px;line-height:1;color:var(--amber)}
+.badge span{font-size:13px;color:var(--ink-2);line-height:1.25}
+.acts{display:flex;flex-wrap:wrap;gap:12px;margin-top:32px}
+.meta{margin-top:22px;color:var(--ink-2);font-size:15px}
+.meta a{border-bottom:1px solid var(--line)}
+
+/* ---------- shapes: one hero cell, the rest supporting ---------- */
+.shapes{padding:clamp(34px,5vw,70px) 0}
+.sec-head{display:flex;flex-wrap:wrap;align-items:end;justify-content:space-between;gap:18px;
+  margin-bottom:clamp(22px,3vw,38px)}
+.lib{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(12px,1.6vw,20px)}
+@media(min-width:700px){.lib{grid-template-columns:repeat(4,1fr)}}
+@media(min-width:1040px){.lib{grid-template-columns:repeat(6,1fr)}}
+.cell{display:block;position:relative}
+.cell .arch{border-radius:var(--arch);overflow:hidden;background:var(--soft);aspect-ratio:3/4;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease)}
+.cell .arch img{width:100%;height:100%;object-fit:cover;
+  transition:transform .5s var(--ease)}
+.cell:hover .arch{transform:translateY(-6px);box-shadow:0 18px 38px -20px rgba(28,21,18,.45)}
+.cell:hover .arch img{transform:scale(1.05)}
+.cell .cap{display:flex;align-items:baseline;gap:8px;padding:12px 4px 0}
+.cell .no{font-family:'Fraunces',serif;font-size:22px;font-weight:400;color:var(--amber);line-height:1}
+.cell .what{font-size:14px;color:var(--ink-2)}
+/* the first cell is the feature */
+@media(min-width:700px){
+  /* the feature fills its 2x2 area: let the arch flex rather than fight
+     aspect-ratio against a spanned grid row, which overflowed its neighbours */
+  .cell.feature{grid-column:span 2;grid-row:span 2;display:flex;flex-direction:column}
+  .cell.feature .arch{aspect-ratio:auto;flex:1;min-height:0}
+  .cell.feature .no{font-size:30px}
+}
+
+/* ---------- categories, alternating rhythm ---------- */
+.cats{background:var(--soft);padding:clamp(34px,5vw,70px) 0}
+.catlist{margin-top:clamp(18px,2vw,30px);border-top:1px solid var(--line)}
+.cat{display:block;border-bottom:1px solid var(--line);transition:background .25s var(--ease)}
+.cat:hover{background:var(--paper)}
+.cat .inner{display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;padding:22px 20px}
+@media(min-width:840px){.cat .inner{grid-template-columns:60px 1fr 1fr auto;gap:30px;padding:26px 24px}}
+.cat .n{display:none;font-family:'Fraunces',serif;font-size:20px;color:var(--amber)}
+@media(min-width:840px){.cat .n{display:block}}
+.cat .note{display:none;color:var(--ink-2);font-size:16px}
+@media(min-width:840px){.cat .note{display:block}}
+.cat .arrow{color:var(--amber);font-size:22px;transition:transform .3s var(--ease)}
+.cat:hover .arrow{transform:translateX(6px)}
+
+/* ---------- how it works, a real 3-step ---------- */
+.steps{padding:clamp(34px,5vw,70px) 0}
+.stepgrid{display:grid;gap:clamp(18px,2.4vw,32px);margin-top:clamp(22px,3vw,38px)}
+@media(min-width:780px){.stepgrid{grid-template-columns:repeat(3,1fr)}}
+.step{border-top:2px solid var(--amber);padding-top:20px}
+.step b{font-family:'Fraunces',serif;font-size:15px;font-weight:400;color:var(--amber);
+  display:block;margin-bottom:10px}
+.step p{color:var(--ink-2);margin-top:8px;font-size:16px}
+
+/* ---------- factory, dark band ---------- */
+.factory{background:var(--deep);color:#F7EFE8;padding:clamp(38px,5vw,76px) 0;
+  border-radius:clamp(26px,3vw,40px);margin:0 var(--gut)}
+.factory .wrap{display:grid;gap:clamp(26px,4vw,54px);align-items:center}
+@media(min-width:920px){.factory .wrap{grid-template-columns:1fr 1fr}}
+.factory h2{color:#fff}
+.factory .lede{color:#E2CDBC}
+.factory .kicker{color:#E9A570}
+.dl{margin-top:26px;display:grid;gap:1px;border-radius:16px;overflow:hidden}
+.dl div{display:grid;grid-template-columns:96px 1fr;gap:14px;padding:14px 18px;
+  background:rgba(255,255,255,.055)}
+.dl dt{color:#C7AB97;font-size:15px}
+.dl dd{margin:0;font-size:16px;color:#fff}
+.map{border-radius:var(--r);overflow:hidden}
+.qs{display:grid;gap:10px;margin-top:16px}
+.q{background:rgba(255,255,255,.06);border-radius:16px;padding:16px 18px;font-size:16px}
+.q cite{display:block;margin-top:7px;font-style:normal;font-size:13px;color:#C7AB97}
+
+/* ---------- close ---------- */
+.close{padding:clamp(40px,6vw,88px) 0;text-align:center}
+.close h2{max-width:16ch;margin:0 auto}
+.close .lede{margin:16px auto 0;text-align:center}
+.close .acts{justify-content:center}
+
+footer{border-top:1px solid var(--line);padding:clamp(30px,4vw,52px) 0 38px;
+  color:var(--ink-2);font-size:15px}
+footer .wrap{display:grid;gap:26px}
+@media(min-width:760px){footer .wrap{grid-template-columns:2fr 1fr 1fr}}
+footer a:hover{color:var(--amber)}
+footer p{line-height:2.05}
+.flag{background:var(--ink);color:#fff;padding:9px 0;font-size:13px;letter-spacing:.02em}
+.flag .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="flag"><div class="wrap">
+  <span>Mock 4 — the design pass</span><span>Fraunces + Outfit · arch motif · amber</span>
+</div></div>
+
+<header>
+  <div class="wrap hbar">
+    <div class="mark">Fine Plastic <em style="color:var(--amber)">Industries</em></div>
+    <nav class="top">
+      <a href="#" class="on">Shapes</a><a href="#">Moulds</a><a href="#">Factory</a>
+      <a href="#">About</a><a href="#">Contact</a>
+    </nav>
+    <a class="btn btn-send hdr-cta" href="#">WhatsApp us</a>
+  </div>
+</header>
+
+<div class="hero">
+  <div class="wrap">
+    <div>
+      <p class="kicker">Sundar Industrial Estate · Lahore</p>
+      <h1 style="margin-top:18px">Bottles you fill,<br><em>moulded to order.</em></h1>
+      <p class="lede">PET and HDPE bottles, jars and jugs. Every shape we run carries a number, so you can point at one instead of describing it down the phone.</p>
+      <div class="acts">
+        <a class="btn btn-send" href="#">Get a price on WhatsApp</a>
+        <a class="btn btn-line" href="#">Browse the shapes</a>
+      </div>
+      <p class="meta"><a href="#">+92 300 9492478</a> · Monday to Saturday, 9am to 6pm</p>
+    </div>
+    <div class="hero-art">
+      <div class="hero-arch"><img src="/images/water-ribbed-5-1200.webp" alt="Clear PET bottles with a diamond textured body"></div>
+      <div class="badge"><b>22</b><span>shapes<br>running</span></div>
+    </div>
+  </div>
+</div>
+
+<section class="shapes">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <p class="kicker">The library</p>
+        <h2 style="margin-top:10px">Point at a shape</h2>
+        <p class="lede">Tag the ones that look like yours and send them in a single message.</p>
+      </div>
+      <a class="btn btn-line" href="#">All 22 shapes</a>
+    </div>
+    <div class="lib">
+      <a class="cell feature" href="#"><div class="arch"><img src="/images/water-waisted-6-1200.webp" alt=""></div><div class="cap"><span class="no">01</span><span class="what">Clear PET · water and juice</span></div></a>
+      <a class="cell" href="#"><div class="arch"><img src="/images/jars-3-sizes-700.webp" alt=""></div><div class="cap"><span class="no">06</span><span class="what">Jars</span></div></a>
+      <a class="cell" href="#"><div class="arch"><img src="/images/pharma-amber-syrup-700.webp" alt=""></div><div class="cap"><span class="no">10</span><span class="what">Amber</span></div></a>
+      <a class="cell" href="#"><div class="arch"><img src="/images/cosmetic-black-cylinder-700.webp" alt=""></div><div class="cap"><span class="no">08</span><span class="what">Black</span></div></a>
+      <a class="cell" href="#"><div class="arch"><img src="/images/clear-tall-cylinder-700.webp" alt=""></div><div class="cap"><span class="no">22</span><span class="what">Clear PET</span></div></a>
+      <a class="cell" href="#"><div class="arch"><img src="/images/hdpe-handled-range-700.webp" alt=""></div><div class="cap"><span class="no">12</span><span class="what">White HDPE</span></div></a>
+      <a class="cell" href="#"><div class="arch"><img src="/images/pharma-amber-vials-700.webp" alt=""></div><div class="cap"><span class="no">11</span><span class="what">Amber</span></div></a>
+      <a class="cell" href="#"><div class="arch"><img src="/images/clear-twist-bluecap-700.webp" alt=""></div><div class="cap"><span class="no">15</span><span class="what">Blue tint</span></div></a>
+      <a class="cell" href="#"><div class="arch"><img src="/images/cosmetic-large-pump-700.webp" alt=""></div><div class="cap"><span class="no">07</span><span class="what">Clear PET</span></div></a>
+    </div>
+  </div>
+</section>
+
+<section class="cats">
+  <div class="wrap">
+    <p class="kicker">What we make</p>
+    <h2 style="margin-top:10px">Six things, one factory</h2>
+    <div class="catlist">
+      <a class="cat" href="#"><div class="inner"><span class="n">01</span><h3>Water, juice and beverages</h3><span class="note">Clear PET, waisted and textured bodies</span><span class="arrow">→</span></div></a>
+      <a class="cat" href="#"><div class="inner"><span class="n">02</span><h3>Edible oil</h3><span class="note">Clear PET, one to five litre bodies</span><span class="arrow">→</span></div></a>
+      <a class="cat" href="#"><div class="inner"><span class="n">03</span><h3>Pharmaceutical</h3><span class="note">Amber PET syrup bottles and vials</span><span class="arrow">→</span></div></a>
+      <a class="cat" href="#"><div class="inner"><span class="n">04</span><h3>Cosmetic</h3><span class="note">PET and HDPE, pumps and screw necks</span><span class="arrow">→</span></div></a>
+      <a class="cat" href="#"><div class="inner"><span class="n">05</span><h3>Ketchup and sauces</h3><span class="note">Large white HDPE with moulded grips</span><span class="arrow">→</span></div></a>
+      <a class="cat" href="#"><div class="inner"><span class="n">06</span><h3>Caps and closures</h3><span class="note">Injection-moulded, quoted with the bottle</span><span class="arrow">→</span></div></a>
+    </div>
+    <p class="lede" style="margin-top:24px">Not on the list? <a href="#" style="color:var(--amber);border-bottom:1px solid currentColor">Send a sample or a drawing</a> and we quote the mould.</p>
+  </div>
+</section>
+
+<section class="steps">
+  <div class="wrap">
+    <p class="kicker">How ordering works</p>
+    <h2 style="margin-top:10px">Three steps, in writing</h2>
+    <div class="stepgrid">
+      <div class="step"><b>Step one</b><h3>Send the spec</h3><p>Capacity, material, colour, quantity, and the cap you already use. A sample bottle or a photo helps most of all.</p></div>
+      <div class="step"><b>Step two</b><h3>We confirm the mould</h3><p>We already have it, or we quote a new mould before anything else is agreed.</p></div>
+      <div class="step"><b>Step three</b><h3>Agreed before the run</h3><p>Quantity and delivery are agreed in writing before the machines start.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="factory">
+  <div class="wrap">
+    <div>
+      <p class="kicker">The factory</p>
+      <h2 style="margin-top:10px">Blow moulding and injection moulding, in Lahore.</h2>
+      <p class="lede">If we do not already have your mould, we quote one, and it is agreed in writing before any bottle price.</p>
+      <dl class="dl">
+        <div><dt>Address</dt><dd>Plot 53-B, Sundar Small Industrial Estate II, Sultanke, Lahore</dd></div>
+        <div><dt>Hours</dt><dd>Monday to Saturday, 9am to 6pm</dd></div>
+        <div><dt>WhatsApp</dt><dd>+92 300 9492478</dd></div>
+      </dl>
+    </div>
+    <div>
+      <div class="map"><img src="/images/map-sundar-1280.webp" alt="Map of the factory location"></div>
+      <div class="qs">
+        <div class="q">Fine Plastic Industries make quality plastic PET, HDPE bottles, jars and containers.<cite>Khalid Muhammad · 4.7 on Google</cite></div>
+        <div class="q">Best quality. In-time delivered.<cite>Tanveer Iqbal · Google review</cite></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="close">
+  <div class="wrap">
+    <h2>Send a capacity, a colour and a quantity.</h2>
+    <p class="lede">The first reply can be a price, not a question.</p>
+    <div class="acts">
+      <a class="btn btn-send" href="#">WhatsApp +92 300 9492478</a>
+      <a class="btn btn-line" href="#">Get a price</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <div class="mark" style="font-size:19px">Fine Plastic <em style="color:var(--amber)">Industries</em></div>
+      <p style="margin-top:10px">Plot 53-B, Sundar Small Industrial Estate II,<br>Sultanke, Lahore · Monday to Saturday, 9am to 6pm</p>
+    </div>
+    <div><p style="color:var(--ink)">Pages</p><p><a href="#">Shapes</a><br><a href="#">Moulds</a><br><a href="#">Factory</a><br><a href="#">Contact</a></p></div>
+    <div><p style="color:var(--ink)">Reach us</p><p><a href="#">+92 300 9492478</a><br><a href="#">WhatsApp</a><br><a href="#">Email</a></p></div>
+  </div>
+</footer>
+
+</body>
+</html>
