@@ -105,6 +105,15 @@
     if (!window.open(url, '_blank', 'noopener')) location.href = url;
   }
 
+  /* Every general "message us" entry point: header, bottom bar, the green CTA
+     band, the menu and the footer. Deliberately excludes the per-shape asks in
+     the dialog and the no-JS panels, which are about one shape, not the tags. */
+  function genericWaLinks() {
+    return $$('a[href*="wa.me/"]').filter(function (a) {
+      return a.id !== 'd-ask' && !a.closest('.nojs-detail');
+    });
+  }
+
   /* true if the share sheet took it; false means the caller should use the link */
   function shareTagged(text, fallbackUrl) {
     if (!shareFiles) return false;
@@ -144,6 +153,12 @@
       var badge = a.querySelector('.badge');
       if (badge) badge.textContent = n ? ' · ' + n : '';
     });
+
+    /* Every other way into WhatsApp carries the tags too. Only two of these
+       used to, and on a phone both the header link and the ones that did were
+       either hidden or easy to miss, so tagging then pressing the big green
+       button sent a bare chat with nothing in it. */
+    genericWaLinks().forEach(function (a) { a.href = href; });
 
     /* quote page: small thumbnails of every tagged shape, each removable */
     var list = $('#taggedList');
@@ -190,8 +205,9 @@
      straight through to the wa.me link, which does open our chat directly. */
   document.addEventListener('click', function (e) {
     if (!e.target.closest) return;
-    var a = e.target.closest('#hdrWa, .bar .wa');
-    if (!a || !tags.length || !canShareFiles()) return;
+    var a = e.target.closest('a[href*="wa.me/"]');
+    if (!a || a.id === 'd-ask' || a.closest('.nojs-detail')) return;
+    if (!tags.length || !canShareFiles()) return;
 
     if (shareFiles) {
       if (shareTagged(withRecipient(message()), a.href)) e.preventDefault();
