@@ -372,3 +372,7 @@ button.add.big[aria-pressed="true"]{border-color:var(--wa);color:var(--wa-d)}
   .hero.light .wrap{order:1;height:auto;padding-top:clamp(28px,8vw,48px);padding-bottom:22px;justify-content:flex-start}
   .hero.light>img{order:2;position:relative;inset:auto;height:auto;aspect-ratio:1/1;object-position:92% 60%!important}
 }
+
+/* a full-width photo band under a plain title, never with words over it */
+.band-photo{margin:0 0 clamp(8px,2vh,20px);background:#d8d3cb}
+.band-photo img{display:block;width:100%;height:auto;max-height:78vh;object-fit:cover}
