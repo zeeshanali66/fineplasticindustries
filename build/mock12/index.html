@@ -30,8 +30,12 @@
 <main>
 
 <section class="hero3d" id="hero3d">
-  <img class="poster" src="/images/hero-09-colours.webp" alt="" onerror="this.remove()">
-  <canvas aria-hidden="true"></canvas>
+  <picture class="poster">
+    <source media="(max-width:860px)" srcset="/images/hero-09-colours-mobile.webp">
+    <img src="/images/hero-09-colours-1600.webp" srcset="/images/hero-09-colours-1600.webp 1600w, /images/hero-09-colours.webp 2560w" sizes="100vw" alt="Shape No. 09 in six colours: clear, white, light blue, green, amber and black" fetchpriority="high">
+  </picture>
+  <video class="loop" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1"
+    data-wide="" data-tall=""></video>
   <div class="wrap">
     <h1>Plastic bottles for your brand.</h1>
     <p class="sub">From our range, or from your design. Any shape can be made in your colour.</p>
@@ -39,8 +43,6 @@
   </div>
   <p class="cap"><a href="/mock12/shape/09/">No. 09</a>, shown in six colours</p>
 </section>
-<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
-<script type="module" src="/mock12/hero3d.js"></script>
 <section class="intro"><div class="wrap">
   <h2>Start from a shape we run, or send us yours.</h2>
   <p>PET and HDPE bottles, jars and jugs that you fill and put your own label on. Pick a shape we already run and we make it in your colour. Or send a sample, a drawing or a sketch with the capacity and the cap you use, and we quote the mould first.</p>

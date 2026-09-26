@@ -334,9 +334,11 @@ button.add.big[aria-pressed="true"]{border-color:var(--wa);color:var(--wa-d)}
 
 /* ---------- the 3D hero ---------- */
 .hero3d{position:relative;height:min(86vh,820px);min-height:520px;overflow:hidden;background:#d8d3cb}
-.hero3d canvas{position:absolute;inset:0;width:100%;height:100%;display:block;opacity:0;transition:opacity 1.1s var(--ease)}
-.hero3d.live canvas{opacity:1}
-.hero3d .poster{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.hero3d .poster,.hero3d .poster img,.hero3d video{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero3d .poster img,.hero3d video{object-fit:cover;object-position:50% 38%}
+.hero3d video{opacity:0;transition:opacity .9s var(--ease)}
+.hero3d.playing video{opacity:1}
+@media(max-width:860px){.hero3d .poster img,.hero3d video{object-position:50% 70%}}
 .hero3d .wrap{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;justify-content:center;pointer-events:none}
 .hero3d .wrap>*{pointer-events:auto}
 .hero3d h1{font-size:clamp(38px,4.6vw,72px);max-width:12ch}

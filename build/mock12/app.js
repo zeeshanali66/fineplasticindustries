@@ -206,5 +206,21 @@ if(form){
   });
 }
 
+/* ---- the hero loop: the still is already showing; the video plays only where it helps ---- */
+(function(){
+  var host=document.getElementById('hero3d'); if(!host)return;
+  var v=host.querySelector('video.loop'); if(!v)return;
+  var calm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var saver=!!(navigator.connection&&navigator.connection.saveData);
+  if(calm||saver||!v.dataset.wide)return;                 /* the still stays; no loop yet, or not wanted */
+  v.src=matchMedia('(max-width:860px)').matches?v.dataset.tall:v.dataset.wide;
+  v.addEventListener('playing',function(){host.classList.add('playing');},{once:true});
+  function go(){var p=v.play();if(p&&p.catch)p.catch(function(){});} /* refused autoplay: the still stays */
+  go();
+  if(window.IntersectionObserver)new IntersectionObserver(function(es){
+    if(es[0].isIntersecting)go(); else v.pause();          /* spare the phone once it is off screen */
+  }).observe(host);
+})();
+
 paint();
 })();
