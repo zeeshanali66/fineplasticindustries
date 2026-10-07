@@ -65,11 +65,100 @@ document.querySelectorAll('[data-send-one]').forEach(function(a){
   a.href=WA+'?text='+encodeURIComponent(message([id]));a.target='_blank';a.rel='noopener';
 });
 
+/* ---- photos: only the phone's share menu can hand WhatsApp a real image, and it cannot pick the chat.
+   A short sheet says so: send the list first (that opens our chat), then share the photos and choose us.
+   Each photo carries its shape number and our WhatsApp number. Desktop keeps the links. ---- */
+var photoMode=!!(window.File&&navigator.share&&navigator.canShare)&&matchMedia('(pointer:coarse)').matches;
+var files={},pending={};
+function stamp(id){
+  if(pending[id])return pending[id];
+  var ready=document.fonts?document.fonts.load('600 30px Figtree'):Promise.resolve();
+  pending[id]=ready.catch(function(){}).then(function(){
+    return new Promise(function(res,rej){
+      var img=new Image();
+      img.onload=function(){
+        var W=img.naturalWidth,H=img.naturalHeight,bar=Math.round(W*.16),m=Math.round(W*.055);
+        var c=document.createElement('canvas');c.width=W;c.height=H+bar;
+        var x=c.getContext('2d');
+        x.drawImage(img,0,0);
+        x.fillStyle='#111';x.fillRect(0,H,W,bar);
+        x.textBaseline='middle';x.fillStyle='#fff';
+        x.font='600 '+Math.round(bar*.34)+'px Figtree,Arial,sans-serif';
+        x.fillText('Shape '+id,m,H+bar/2);
+        var left=m*2+x.measureText('Shape '+id).width,num='WhatsApp us at '+WA_DISPLAY,f=Math.round(bar*.24);
+        x.textAlign='right';
+        do{x.font='600 '+f+'px Figtree,Arial,sans-serif';f--;}while(f>10&&x.measureText(num).width>W-m-left);
+        x.fillText(num,W-m,H+bar*.66);
+        x.fillStyle='#B9B9B9';x.font='400 '+Math.round(bar*.19)+'px Figtree,Arial,sans-serif';
+        x.fillText('Fine Plastic Industries',W-m,H+bar*.36);
+        c.toBlob(function(b){
+          if(!b)return rej(new Error('encode'));
+          files[id]=new File([b],'fine-plastic-shape-'+id+'.jpg',{type:'image/jpeg'});
+          res(files[id]);
+        },'image/jpeg',.9);
+      };
+      img.onerror=function(){rej(new Error('load'));};
+      img.src='/images/'+ROW[id][1]+'-700.webp';
+    });
+  });
+  pending[id].catch(function(){delete pending[id];});
+  return pending[id];
+}
+/* share t's photos with text; anything short of a share goes to the text link */
+function sharePhotos(t,text,fallback,done){
+  var go=function(){
+    var list=t.map(function(id){return files[id];}).filter(Boolean);
+    var data={files:list,text:text},ok=false;
+    try{ok=list.length===t.length&&navigator.canShare(data);}catch(e){}
+    if(!ok){fallback();return;}
+    navigator.share(data).then(done,function(err){
+      if(err&&err.name==='AbortError')return; /* they closed the menu on purpose */
+      fallback();
+    });
+  };
+  if(t.every(function(id){return files[id];})){go();return;}
+  /* not built yet: the tap stays valid for a few seconds, so wait briefly */
+  var over=false;
+  var timer=setTimeout(function(){if(!over){over=true;fallback();}},2500);
+  Promise.all(t.map(stamp)).then(function(){
+    if(over)return;over=true;clearTimeout(timer);go();
+  },function(){
+    if(over)return;over=true;clearTimeout(timer);fallback();
+  });
+}
+var dlg=document.getElementById('photoDlg'),dlgIds=[];
+function askPhotos(t){
+  if(!dlg||!t.length)return;
+  dlgIds=t;
+  t.forEach(function(id){stamp(id).catch(function(){});}); /* ready before they tap Share */
+  document.getElementById('pdChat').href=WA+'?text='+encodeURIComponent(message(t));
+  document.querySelector('#pdShare span').textContent=t.length>1?'Share '+t.length+' photos':'Share the photo';
+  dlg.showModal();
+}
+if(dlg){
+  var chat=document.getElementById('pdChat');
+  document.getElementById('pdShare').addEventListener('click',function(){
+    sharePhotos(dlgIds,'Hello Fine Plastic Industries. I am interested in shape '+dlgIds.join(', ')+'.',
+      function(){location.href=chat.href;},function(){dlg.close();});
+  });
+  document.getElementById('pdClose').addEventListener('click',function(){dlg.close();});
+  dlg.addEventListener('click',function(e){if(e.target===dlg)dlg.close();}); /* a tap outside the sheet */
+}
+if(photoMode)document.querySelectorAll('[data-photo-one]').forEach(function(b){
+  b.hidden=false;
+  b.addEventListener('click',function(){askPhotos([b.getAttribute('data-photo-one')]);});
+});
+
 /* ---- the tray ---- */
 var tray=document.getElementById('tray');
 var tl,ts;
 if(tray){
   tl=document.getElementById('trayList');ts=document.getElementById('traySend');
+  if(photoMode){
+    var tp=document.getElementById('trayPhotos');
+    tp.hidden=false;tray.classList.add('ph');
+    tp.addEventListener('click',function(){askPhotos(sorted());});
+  }
   document.getElementById('trayClr').addEventListener('click',function(){tags=[];save();paint();});
 }
 
