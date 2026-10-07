@@ -448,11 +448,11 @@ button.add.big[aria-pressed="true"]{border-color:var(--wa);color:var(--wa-d)}
 @media(max-width:860px){
   .hero3d .wrap{justify-content:flex-start;padding-top:clamp(28px,6vh,48px)}
 }
-/* phones: the bottle stands behind the buttons with its cap just above them, the layered look the owner
-   picked (2026-10-07). Type and spacing are in vw so the overlap lands the same on every phone width; the
+/* phones: the tip of the cap tucks just behind the bottom edge of the buttons, a little overlap as the owner
+   asked (2026-10-07). Type and spacing are in vw so the overlap lands the same on every phone width; the
    frame is cropped from the top, which is plain backdrop, to lift the bottle up to the buttons. */
 @media(max-width:560px){
-  .hero3d{aspect-ratio:1/1.154}
+  .hero3d{aspect-ratio:1/1.3}
   .hero3d .poster img,.hero3d video{object-position:50% 100%}
   .hero3d .wrap{padding-top:7vw}
   .hero3d h1{font-size:9.75vw}
